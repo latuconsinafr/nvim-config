@@ -7,7 +7,12 @@ local lspconfig = require('lspconfig')
 
 mason.setup()
 mason_lspconfig.setup {
-  ensure_installed = { 'lua_ls' } -- List default preferred LSP servers here
+  -- List default preferred LSP servers here
+  ensure_installed = {
+    'lua_ls', -- lua
+    'eslint', -- eslint
+    'vtsls', -- typescript
+  }
 }
 
 -- Key mappings for LSP functions
@@ -71,3 +76,34 @@ lspconfig.lua_ls.setup {
     },
   }
 }
+
+-- Eslint 
+lspconfig.eslint.setup {
+  on_init = function(client)
+    -- On init
+  end,
+  settings = {
+    -- Settings
+  }
+}
+
+-- Typescript (ts_ls)
+lspconfig.ts_ls.setup {
+  on_init = function(client)
+    -- On init
+  end,
+  settings = {
+    -- Settings
+  }
+}
+
+-- Vtsls
+lspconfig.vtsls.setup {
+  on_init = function(client)
+    -- On init
+  end,
+  settings = {
+    -- Settings
+  }
+}
+
