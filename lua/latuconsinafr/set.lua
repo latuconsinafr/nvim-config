@@ -28,6 +28,3 @@ vim.opt.isfname:append("@-@")
 
 -- Performance
 vim.opt.updatetime = 50
-
--- Leader key
-vim.g.mapleader = " "
