@@ -1,4 +1,4 @@
 -- Load personal configurations
-require("latuconsinafr.packer")  -- Plugin management
-require("latuconsinafr.set")     -- Custom settings
-require("latuconsinafr.remap")   -- Key mappings
+require("latuconsinafr.settings")     -- Custom settings
+require("latuconsinafr.maps")         -- Key mappings
+require("latuconsinafr.plugins")      -- Plugin management
