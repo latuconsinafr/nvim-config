@@ -17,18 +17,43 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
     requires = {
-      { 'nvim-lua/plenary.nvim' }, -- Core dependency for telescope
-      -- BurntSushi/ripgrep for live_grep and grep_string
-      { 'nvim-telescope/telescope-fzf-native.nvim', -- Improve sorting performance
-        run = 'make' -- alternatively use cmake
+      -- Core dependency
+      { 'nvim-lua/plenary.nvim' },
+
+      -- Optional: Improve sorting performance with native FZF extension
+      { 'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make' -- Build FZF extension (alternatively use cmake)
       },
-      -- sharkdp/fd for finder 
+
+      -- Optional: For using fd with find_files and rg with live_grep
+      { 'sharkdp/fd' },
+      { 'BurntSushi/ripgrep' },
+
+      -- Optional: Tree-sitter for better syntax highlighting in Telescope preview
+      { 'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate' -- Update Tree-sitter after install
+      },
+
+      -- Optional: File icons for better visual clarity
+      { 'nvim-tree/nvim-web-devicons' },
+
+      -- Optional: Symbols picker for emoji, math, and more
+      { 'nvim-telescope/telescope-symbols.nvim' },
+
+      -- Optional: Clipboard manager
+      { 'AckslD/nvim-neoclip.lua',
+        requires = {
+          { 'tami5/sqlite.lua', module = 'sqlite' },
+        },
+      },
+
+      -- Optional: Cheatsheet
       {
-        -- Note: :TSUpdate will cause Packer to fail upon the first installation
-        'nvim-treesitter/nvim-treesitter', -- Finder/Preview
-        run = ':TSUpdate'
+        'doctorfree/cheatsheet.nvim',
+        requires = {
+          { 'nvim-lua/popup.nvim' },
+        },
       }
-      -- Optional dependencies: devicons
     }
   }
 end)

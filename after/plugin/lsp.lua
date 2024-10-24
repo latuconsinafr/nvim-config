@@ -11,7 +11,7 @@ mason_lspconfig.setup {
   ensure_installed = {
     'lua_ls', -- lua
     'eslint', -- eslint
-    'vtsls', -- typescript
+    'vtsls',  -- typescript
   }
 }
 
@@ -63,11 +63,11 @@ mason_lspconfig.setup_handlers({
 })
 
 -- Manually setup configs for specified language
+-- Note: need to re-apply the dynamic setup
+
 -- Lua (lua_ls)
 lspconfig.lua_ls.setup {
-  on_init = function(client)
-    -- On init
-  end,
+  on_attach = on_attach,
   settings = {
     Lua = {
       diagnostics = {
@@ -76,34 +76,3 @@ lspconfig.lua_ls.setup {
     },
   }
 }
-
--- Eslint 
-lspconfig.eslint.setup {
-  on_init = function(client)
-    -- On init
-  end,
-  settings = {
-    -- Settings
-  }
-}
-
--- Typescript (ts_ls)
-lspconfig.ts_ls.setup {
-  on_init = function(client)
-    -- On init
-  end,
-  settings = {
-    -- Settings
-  }
-}
-
--- Vtsls
-lspconfig.vtsls.setup {
-  on_init = function(client)
-    -- On init
-  end,
-  settings = {
-    -- Settings
-  }
-}
-
