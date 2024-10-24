@@ -54,6 +54,14 @@ return require('packer').startup(function(use)
           { 'nvim-lua/popup.nvim' },
         },
       }
+    },
+
+    -- File explorer
+    use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+        'nvim-tree/nvim-web-devicons', -- Optional: file icons for better visual clarity
+      },
     }
   }
 end)
