@@ -74,6 +74,30 @@ return require('packer').startup(function(use)
       requires = {
         'nvim-tree/nvim-web-devicons', -- Optional: file icons for better visual clarity
       },
+    },
+
+    -- Auto pair
+    use {
+      'windwp/nvim-autopairs',
+      event = 'InsertEnter',
+      config = function()
+        require('nvim-autopairs').setup {}
+      end
+    },
+
+    -- Toggling comment
+    use 'terrortylor/nvim-comment',
+
+    -- Lua line
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    },
+
+    -- Color scheme/theme
+    use {
+      'rose-pine/neovim',
+      as = 'rose-pine',
     }
   }
 end)

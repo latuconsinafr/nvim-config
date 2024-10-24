@@ -3,9 +3,6 @@ local telescope = require('telescope')
 local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 
--- Additional extension
-local neoclip = require('neoclip')
-
 -- Telescope setup
 telescope.setup {
   defaults = {
@@ -49,31 +46,11 @@ telescope.setup {
       override_file_sorter = true,
       case_mode = "smart_case"
     },
-    symbols = {
-
-    }
   }
 }
 
 -- Load telescope extensions
 telescope.load_extension('fzf')
--- telescope.load_extension('symbols')
-telescope.load_extension('neoclip')
-telescope.load_extension('cheatsheet')
-
--- Setup additional extensions
-neoclip.setup({
-  keys = {
-    telescope = {
-      i = {
-        delete = '<nop>', -- Disable delete
-      },
-      n = {
-        delete = '<nop>', -- Disable delete
-      }
-    }
-  }
-})
 
 -- Keymaps
 local opts = { noremap = true, silent = true }
