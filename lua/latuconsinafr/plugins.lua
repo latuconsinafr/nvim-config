@@ -7,9 +7,21 @@ return require('packer').startup(function(use)
 
   -- Mason and mason-lspconfig to manage lspconfig
   use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig',
+  }
+
+  -- Completion
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',    -- LSP completion source
+      'hrsh7th/cmp-buffer',      -- Buffer completion source
+      'hrsh7th/cmp-path',        -- Path completion source
+      'hrsh7th/cmp-cmdline',     -- Command line completion source
+      'saadparwaiz1/cmp_luasnip' -- Snippet completion source
+    },
   }
 
   -- Fuzzy finder
