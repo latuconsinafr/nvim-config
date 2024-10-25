@@ -1,5 +1,6 @@
 local rosepine = require('rose-pine')
 
+-- Setup
 rosepine.setup({
   variant = "auto",      -- auto, main, moon, or dawn
   dark_variant = "main", -- main, moon, or dawn

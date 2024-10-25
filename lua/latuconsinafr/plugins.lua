@@ -98,6 +98,20 @@ return require('packer').startup(function(use)
     use {
       'rose-pine/neovim',
       as = 'rose-pine',
+    },
+
+    -- Focus mode
+    use 'folke/twilight.nvim',
+
+    -- Notify
+    use 'rcarriga/nvim-notify',
+
+    -- Go to preview
+    use {
+      'rmagatti/goto-preview',
+      config = function()
+        require('goto-preview').setup {}
+      end
     }
   }
 end)

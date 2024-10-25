@@ -1,6 +1,7 @@
 -- Load the nvim cmp plugin
 local cmp = require('cmp')
 
+-- Setup
 cmp.setup({
   snippet = {
     -- Define how to expand snippets

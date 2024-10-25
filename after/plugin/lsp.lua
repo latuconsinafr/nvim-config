@@ -2,8 +2,11 @@
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
 
--- Load the LSP configurations
+-- Load the LSP
 local lspconfig = require('lspconfig')
+
+-- Load the notify
+local notify = require('notify')
 
 mason.setup()
 mason_lspconfig.setup {
@@ -11,7 +14,8 @@ mason_lspconfig.setup {
   ensure_installed = {
     'lua_ls', -- lua
     'eslint', -- eslint
-    'vtsls',  -- typescript
+    'ts_ls', -- typescript1
+    'rust_analyzer' -- rust
   }
 }
 

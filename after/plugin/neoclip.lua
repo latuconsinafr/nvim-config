@@ -1,5 +1,6 @@
 local neoclip = require('neoclip')
 
+-- Setup
 neoclip.setup({
   history = 1000,
   enable_persistent_history = true,
