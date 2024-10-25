@@ -20,6 +20,7 @@ return require('packer').startup(function(use)
       'hrsh7th/cmp-buffer',      -- Buffer completion source
       'hrsh7th/cmp-path',        -- Path completion source
       'hrsh7th/cmp-cmdline',     -- Command line completion source
+      'L3MON4D3/LuaSnip',        -- Lua snippet
       'saadparwaiz1/cmp_luasnip' -- Snippet completion source
     },
   }
@@ -112,6 +113,11 @@ return require('packer').startup(function(use)
       config = function()
         require('goto-preview').setup {}
       end
-    }
+    },
+
+    -- Terminal
+    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+      require("toggleterm").setup()
+    end }
   }
 end)
