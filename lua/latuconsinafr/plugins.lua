@@ -86,8 +86,21 @@ return require('packer').startup(function(use)
       end
     },
 
-    -- Toggling comment
+    -- Comments
     use 'terrortylor/nvim-comment',
+    use {
+      "danymat/neogen",
+      requires = {
+        -- Optional: Tree-sitter for better syntax highlighting in Telescope preview
+        { 'nvim-treesitter/nvim-treesitter',
+          run = ':TSUpdate' -- Update Tree-sitter after install
+        },
+      },
+      config = function()
+        require('neogen').setup {}
+      end,
+      tag = "*"
+    },
 
     -- Lua line
     use {

@@ -60,7 +60,6 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, opts)  -- Find files
 vim.keymap.set('n', '<leader>fg', builtin.git_files, opts)   -- Git files
 vim.keymap.set('n', '<leader>fs', builtin.grep_string, opts) -- Grep string under cursor
 vim.keymap.set('n', '<leader>fl', builtin.live_grep, opts)   -- Live grep search
-vim.keymap.set('n', '<leader>fl', builtin.live_grep, opts)   -- Live grep search
 
 -- Vim pickers
 vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)         -- List open buffers
