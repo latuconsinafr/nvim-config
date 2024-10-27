@@ -25,5 +25,10 @@ treesitter.setup {
   -- Automatic indentation
   indentation = {
     enable = true
+  },
+
+  -- Matchup
+  matchup = {
+    enable = true
   }
 }

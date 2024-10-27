@@ -77,7 +77,7 @@ return require('packer').startup(function(use)
       },
     },
 
-    -- Auto pair
+    -- Brackets
     use {
       'windwp/nvim-autopairs',
       event = 'InsertEnter',
@@ -85,6 +85,7 @@ return require('packer').startup(function(use)
         require('nvim-autopairs').setup {}
       end
     },
+    use 'andymass/vim-matchup',
 
     -- Comments
     use 'terrortylor/nvim-comment',
