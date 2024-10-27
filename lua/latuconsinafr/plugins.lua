@@ -131,6 +131,9 @@ return require('packer').startup(function(use)
     -- Terminal
     use { "akinsho/toggleterm.nvim", tag = '*', config = function()
       require("toggleterm").setup()
-    end }
+    end },
+
+    -- Fold
+    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   }
 end)

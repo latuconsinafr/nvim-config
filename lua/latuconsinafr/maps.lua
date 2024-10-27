@@ -6,7 +6,7 @@ vim.keymap.set('n', '<leader>sv', ':source ~/.config/nvim/init.lua<CR>', { silen
 
 -- Source current file
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
+  vim.cmd("so")
 end)
 
 -- File Explorer
@@ -31,11 +31,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Clipboard operations, copy to system clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Delete without yanking
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Escape using <C-c> in insert mode
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -49,9 +49,11 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- Find and replace word 
+-- Find and replace word
 vim.keymap.set("n", "<leader>fr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>frc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>sr", [[:%s//gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>src", [[:.,$s//gc<Left><Left><Left>]])
 
 -- Find and delete
 vim.keymap.set("n", "<leader>fd", [[:g/\<C-r><C-w\>/d<CR>]])

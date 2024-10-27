@@ -29,3 +29,6 @@ vim.opt.cursorline = true
 
 -- Performance
 vim.opt.updatetime = 50
+
+-- Fold options
+vim.opt.foldmethod = 'syntax'

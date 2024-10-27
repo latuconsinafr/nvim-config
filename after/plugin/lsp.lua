@@ -5,16 +5,13 @@ local mason_lspconfig = require('mason-lspconfig')
 -- Load the LSP
 local lspconfig = require('lspconfig')
 
--- Load the notify
-local notify = require('notify')
-
 mason.setup()
 mason_lspconfig.setup {
   -- List default preferred LSP servers here
   ensure_installed = {
     'lua_ls', -- lua
     'eslint', -- eslint
-    'ts_ls', -- typescript1
+    'ts_ls', -- typescript
     'rust_analyzer' -- rust
   }
 }
