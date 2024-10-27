@@ -23,5 +23,19 @@ cmp.setup({
     { name = 'buffer' },   -- Use buffer contents as a source for completions
     { name = 'path' },     -- Use filesystem paths as a source for completions
     { name = 'luasnip' },  -- Use LuaSnip snippets as a source for completions
+    {
+      name = 'spell',
+      option = {
+        keep_all_entries = false,
+        enable_in_context = function()
+          return true
+        end,
+        preselect_correct_word = true,
+      },
+    }, -- Use cmp-spell for highlighting misspelled words
   },
 })
+
+-- Configure spell capabilities
+vim.opt.spell = true
+vim.opt.spelllang = { "en_gb" }

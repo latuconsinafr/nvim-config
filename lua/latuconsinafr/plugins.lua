@@ -16,12 +16,13 @@ return require('packer').startup(function(use)
   use {
     'hrsh7th/nvim-cmp',
     requires = {
-      'hrsh7th/cmp-nvim-lsp',    -- LSP completion source
-      'hrsh7th/cmp-buffer',      -- Buffer completion source
-      'hrsh7th/cmp-path',        -- Path completion source
-      'hrsh7th/cmp-cmdline',     -- Command line completion source
-      'L3MON4D3/LuaSnip',        -- Lua snippet
-      'saadparwaiz1/cmp_luasnip' -- Snippet completion source
+      'hrsh7th/cmp-nvim-lsp',     -- LSP completion source
+      'hrsh7th/cmp-buffer',       -- Buffer completion source
+      'hrsh7th/cmp-path',         -- Path completion source
+      'hrsh7th/cmp-cmdline',      -- Command line completion source
+      'L3MON4D3/LuaSnip',         -- Lua snippet
+      'saadparwaiz1/cmp_luasnip', -- Snippet completion source
+      'f3fora/cmp-spell'          -- Highlight misspelled words
     },
   }
 
