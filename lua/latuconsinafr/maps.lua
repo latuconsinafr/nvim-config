@@ -50,10 +50,10 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Find and replace word
-vim.keymap.set("n", "<leader>fr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>|nohlsearch<CR>]])
-vim.keymap.set("n", "<leader>frc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>|nohlsearch<CR>]])
-vim.keymap.set("n", "<leader>sr", [[:%s//gI<Left><Left><Left>|nohlsearch<CR>]])
-vim.keymap.set("n", "<leader>src", [[:.,$s//gc<Left><Left><Left>|nohlsearch<CR>]])
+vim.keymap.set("n", "<leader>fr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>frc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>sr", [[:%s//gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>src", [[:.,$s//gc<Left><Left><Left>]])
 
 -- Find and delete
 vim.keymap.set("n", "<leader>fd", [[:g/\<C-r><C-w\>/d<CR>]])

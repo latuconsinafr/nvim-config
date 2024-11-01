@@ -10,8 +10,6 @@ vim.opt.softtabstop = 2
 
 -- Indentation 
 vim.opt.smartindent = true
-vim.opt.list = true
-vim.opt.listchars:append('lead:⋅')
 
 -- Enable clipboard access
 vim.opt.clipboard = 'unnamedplus'
