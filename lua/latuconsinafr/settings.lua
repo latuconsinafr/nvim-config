@@ -8,8 +8,10 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 
--- Enable smart indentation
+-- Indentation 
 vim.opt.smartindent = true
+vim.opt.list = true
+vim.opt.listchars:append('lead:⋅')
 
 -- Enable clipboard access
 vim.opt.clipboard = 'unnamedplus'
@@ -23,8 +25,8 @@ vim.opt.termguicolors = true
 
 -- Scrolling and UI
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
+vim.opt.signcolumn = 'yes'
+vim.opt.isfname:append('@-@')
 vim.opt.cursorline = true
 
 -- Performance

@@ -91,7 +91,7 @@ return require('packer').startup(function(use)
     -- Comments
     use 'terrortylor/nvim-comment',
     use {
-      "danymat/neogen",
+      'danymat/neogen',
       requires = {
         -- Optional: Tree-sitter for better syntax highlighting in Telescope preview
         { 'nvim-treesitter/nvim-treesitter',
@@ -101,7 +101,7 @@ return require('packer').startup(function(use)
       config = function()
         require('neogen').setup {}
       end,
-      tag = "*"
+      tag = '*'
     },
 
     -- Lua line
@@ -131,11 +131,14 @@ return require('packer').startup(function(use)
     },
 
     -- Terminal
-    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-      require("toggleterm").setup()
+    use { 'akinsho/toggleterm.nvim', tag = '*', config = function()
+      require('toggleterm').setup()
     end },
 
     -- Fold
-    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' },
+
+    -- Indentation line
+    use 'lukas-reineke/indent-blankline.nvim'
   }
 end)
