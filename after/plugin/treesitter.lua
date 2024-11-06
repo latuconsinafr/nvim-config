@@ -1,5 +1,7 @@
 local treesitter = require('nvim-treesitter.configs')
+local context = require('treesitter-context')
 
+-- Setup
 treesitter.setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
   ensure_installed = { "lua", "javascript", "typescript", "rust" },
@@ -31,4 +33,11 @@ treesitter.setup {
   matchup = {
     enable = true
   }
+}
+
+context.setup {
+  enable = true,  -- Enable the context display
+  throttle = true,  -- Optionally throttle the context display to improve performance
+  max_lines = 0,   -- Show no more than this many lines of context (0 means infinite)
+  trim_scope = true, -- Automatically trim context scope (class, method) from redundant display
 }

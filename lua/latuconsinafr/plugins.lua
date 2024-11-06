@@ -60,14 +60,6 @@ return require('packer').startup(function(use)
           { 'tami5/sqlite.lua', module = 'sqlite' },
         },
       },
-
-      -- Optional: Cheatsheet
-      {
-        'doctorfree/cheatsheet.nvim',
-        requires = {
-          { 'nvim-lua/popup.nvim' },
-        },
-      }
     },
 
     -- File explorer
@@ -139,6 +131,15 @@ return require('packer').startup(function(use)
     use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' },
 
     -- Indentation line
-    use 'lukas-reineke/indent-blankline.nvim'
+    use 'lukas-reineke/indent-blankline.nvim',
+
+    -- Which key
+    use 'folke/which-key.nvim',
+
+    -- Smooth scroll
+    use 'karb94/neoscroll.nvim',
+
+    -- Context
+    use 'nvim-treesitter/nvim-treesitter-context'
   }
 end)

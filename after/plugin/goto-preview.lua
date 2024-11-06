@@ -1,3 +1,4 @@
+-- Load the go to preview plugin
 local goto_preview = require('goto-preview')
 
 -- Setup

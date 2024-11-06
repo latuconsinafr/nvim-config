@@ -1,14 +1,4 @@
-local highlight = {
-  "CursorColumn",
-  "Whitespace"
-}
-
+-- Load the ibl preview plugin
 local ibl = require('ibl')
 
-ibl.setup {
-  indent = { highlight = highlight, char = "" },
-  whitespace = {
-    highlight = highlight,
-  },
-  scope = { enabled = false },
-}
+ibl.setup()

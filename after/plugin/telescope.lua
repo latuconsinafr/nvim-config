@@ -94,6 +94,3 @@ vim.keymap.set('n', '<leader>ss', ':Telescope symbols<CR>', opts) -- Lists of al
 
 -- Telescope clipboard manager
 vim.keymap.set('n', '<leader>cp', ':Telescope neoclip<CR>', opts) -- Lists of all clips
-
--- Telescope cheatsheet
-vim.keymap.set('n', '<leader>?', ':Telescope cheatsheet<CR>', opts) -- Lists of all cheatsheets command

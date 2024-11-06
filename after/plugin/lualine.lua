@@ -1,3 +1,4 @@
+-- Load lua line plugin 
 local lualine = require('lualine')
 
 -- Setup
