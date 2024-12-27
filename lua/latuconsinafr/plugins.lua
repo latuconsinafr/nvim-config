@@ -140,6 +140,17 @@ return require('packer').startup(function(use)
     use 'karb94/neoscroll.nvim',
 
     -- Context
-    use 'nvim-treesitter/nvim-treesitter-context'
+    use 'nvim-treesitter/nvim-treesitter-context',
+
+    -- Copilot
+    use { 'zbirenbaum/copilot.lua' },
+
+    use {
+      'zbirenbaum/copilot-cmp',
+      after = { 'copilot.lua' },
+      config = function()
+        require('copilot_cmp').setup()
+      end
+    }
   }
 end)

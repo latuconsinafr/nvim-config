@@ -19,6 +19,7 @@ cmp.setup({
     ['<C-d>'] = cmp.mapping.scroll_docs(4),            -- Scroll documentation downwards
   },
   sources = {
+    { name = 'copilot' },  -- Use copilot.lua as a source for completions
     { name = 'nvim_lsp' }, -- Use nvim_lsp as a source for LSP completions
     { name = 'buffer' },   -- Use buffer contents as a source for completions
     { name = 'path' },     -- Use filesystem paths as a source for completions
