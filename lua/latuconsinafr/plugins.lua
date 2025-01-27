@@ -151,6 +151,8 @@ return require('packer').startup(function(use)
       config = function()
         require('copilot_cmp').setup()
       end
-    }
+    },
+
+    use { 'AndreM222/copilot-lualine' }
   }
 end)

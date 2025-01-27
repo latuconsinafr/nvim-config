@@ -40,6 +40,12 @@ lualine.setup {
     },
     lualine_x = {
       {
+        'copilot',
+        cond = function()
+          return vim.fn.winwidth(0) > 80 -- Show copilot if window width is greater than 80
+        end
+      },
+      {
         'encoding',
         cond = function()
           return vim.fn.winwidth(0) > 80 -- Show encoding if window width is greater than 80
