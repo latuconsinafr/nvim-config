@@ -8,7 +8,7 @@ rosepine.setup({
   styles = {
     bold = false,
     italic = false,
-    transparency = true,
+    transparency = false,
   },
 })
 
