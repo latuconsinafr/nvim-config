@@ -36,8 +36,10 @@ treesitter.setup {
 }
 
 context.setup {
-  enable = true,  -- Enable the context display
-  throttle = true,  -- Optionally throttle the context display to improve performance
-  max_lines = 0,   -- Show no more than this many lines of context (0 means infinite)
-  trim_scope = true, -- Automatically trim context scope (class, method) from redundant display
+  enable = true,           -- Enable the context display
+  throttle = true,         -- Optionally throttle the context display to improve performance
+  max_lines = 5,           -- Show no more than this many lines of context (0 means infinite)
+  trim_scope = 'outer',    -- Automatically trim context scope (class, method) from redundant display
+  multiline_threshold = 5, -- collapse context lines if any scope line exceeds 5 lines
+  mode = 'cursor',         -- Only show context for current cursor location
 }
