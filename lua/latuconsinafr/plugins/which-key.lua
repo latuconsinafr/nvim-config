@@ -1,18 +1,19 @@
 return {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
+  "folke/which-key.nvim",      -- Plugin repo for which-key.nvim
+  event = "VeryLazy",          -- Load plugin on VeryLazy event (after startup)
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
+    -- Configuration options for which-key can be placed here.
+    -- Leave empty for defaults or customize as needed.
   },
   keys = {
     {
-      "<leader>?",
+      "<leader>?",             -- Keybinding to trigger which-key popup
       function()
+        -- Show buffer-local keymaps only (not global mappings)
         require("which-key").show({ global = false })
       end,
-      desc = "Buffer Local Keymaps (which-key)",
+      desc = "Buffer Local Keymaps (which-key)",  -- Description shown in which-key menu
     },
   },
 }
+

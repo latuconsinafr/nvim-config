@@ -32,3 +32,6 @@ vim.opt.updatetime = 50
 
 -- Fold options
 vim.opt.foldmethod = 'syntax'
+
+-- Remove the ~ at end of buffer
+vim.opt.fillchars = { eob = ' ' }
