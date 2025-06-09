@@ -35,3 +35,7 @@ vim.opt.foldmethod = 'syntax'
 
 -- Remove the ~ at end of buffer
 vim.opt.fillchars = { eob = ' ' }
+
+-- Configure spell capabilities
+vim.opt.spell = true
+vim.opt.spelllang = { "en_gb" }

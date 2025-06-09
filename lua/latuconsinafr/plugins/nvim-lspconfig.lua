@@ -11,6 +11,7 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
+      "f3fora/cmp-spell",
     },
     config = function()
       local cmp = require("cmp")
@@ -50,6 +51,7 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "spell" },
         }, {
           { name = "buffer" },
           { name = "path" },
