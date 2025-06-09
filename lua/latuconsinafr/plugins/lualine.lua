@@ -17,19 +17,21 @@ return {
         lualine_z = { 'location' },
       },
       winbar = {
-        lualine_c = {
+        lualine_a = {
           {
             'filename',
-            file_status = true,         -- Shows file status (readonly, modified)
-            path = 1,                   -- 0 = just filename, 1 = relative path, 2 = absolute path
-            shorting_target = 40,
-            color = { fg = '#fabd2f' },
+            file_status = true,     -- Shows [Modified], [Readonly]
+            newfile_status = true,  -- Show [New] for new files
+            path = 1,               -- 0 = just filename, 1 = relative path
+            symbols = {
+              modified = ' ●',      -- Text to show when the file is modified
+              readonly = ' ',      -- Icon for readonly
+              unnamed = '[No Name]',
+              newfile = '[New]',
+            }
           }
-        },
-        options = {
-          theme = 'auto',
-        },
-      },
+        }
+      }
     }
   end,
 }
