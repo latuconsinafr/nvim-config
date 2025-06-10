@@ -59,7 +59,51 @@ return {
           ["ctrl-u"] =
           "preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up",
         },
-      }
+      },
+
+      -- Lsp configuration
+      lsp = {
+        document_symbols      = {
+          prompt = "Document Symbols ❯ ",
+          path_shorten = 1,
+          symbol_style = 1,
+          symbol_hl_prefix = "CmpItemKind",
+          winopts = { height = 0.60, width = 0.80 },
+        },
+        workspace_symbols     = {
+          prompt = "Workspace Symbols ❯ ",
+          winopts = { height = 0.60, width = 0.80 },
+        },
+        definitions           = { prompt = "Definitions ❯ ", winopts = { height = 0.50, width = 0.80 } },
+        declarations          = { prompt = "Declarations ❯ ", winopts = { height = 0.50, width = 0.80 } },
+        references            = { prompt = "References ❯ ", winopts = { height = 0.60, width = 0.90 } },
+        implementations       = { prompt = "Implementations ❯ ", winopts = { height = 0.50, width = 0.80 } },
+        typedefs              = { prompt = "Type Definitions ❯ ", winopts = { height = 0.50, width = 0.80 } },
+        incoming_calls        = {
+          prompt = "Incoming Calls ❯ ",
+          winopts = { height = 0.60, width = 0.90 },
+        },
+        outgoing_calls        = {
+          prompt = "Outgoing Calls ❯ ",
+          winopts = { height = 0.60, width = 0.90 },
+        },
+        finder                = {
+          prompt = "Finder ❯ ",
+          winopts = { height = 0.65, width = 0.85 },
+        },
+        diagnostics_document  = {
+          prompt = "Diagnostics (doc) ❯ ",
+          winopts = { height = 0.60, width = 0.90 },
+        },
+        diagnostics_workspace = {
+          prompt = "Diagnostics (ws) ❯ ",
+          winopts = { height = 0.60, width = 0.90 },
+        },
+        code_actions          = {
+          prompt = "Code Actions ❯ ",
+          winopts = { layout = "reverse-list", height = 0.30, width = 0.70 },
+        },
+      },
     })
   end,
 }

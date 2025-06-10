@@ -44,11 +44,17 @@ return {
         -- Leave empty to allow dynamic installation of any language parser
         ensure_installed = {},
 
+        -- Parsers to ignore (you can list things like "javascript" here)
+        ignore_install = {},
+
         -- Automatically install missing parsers when entering a buffer
         auto_install = true,
 
         -- Don't block editor waiting for parser installs
         sync_install = false,
+
+        -- (Type-checker wants this—even if you don't actually reference it)
+        modules = {},
 
         -- Syntax highlighting using Treesitter
         highlight = {
