@@ -11,14 +11,14 @@ return {
     lazy = false,
     config = function()
       -- Folding settings to allow full visibility at startup
-      vim.o.foldcolumn = "1"    -- Show fold column (like sign column)
+      vim.o.foldcolumn = "0"    -- Show fold column (like sign column)
       vim.o.foldlevel = 99      -- High default so folds are open
       vim.o.foldlevelstart = 99 -- Same as above when opening files
       vim.o.foldenable = true   -- Enable folding by default
 
       -- Setup nvim-ufo with provider priorities
       require("ufo").setup({
-        provider_selector = function(bufnr, filetype, buftype)
+        provider_selector = function(_, _, _)
           -- Try treesitter first, fall back to indent
           return { "treesitter", "indent" }
         end,

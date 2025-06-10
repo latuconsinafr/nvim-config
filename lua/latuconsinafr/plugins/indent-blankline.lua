@@ -15,6 +15,7 @@ return {
         show_start = true,                 -- Show the start of the current scope
         show_end = true,                   -- Show the end of the current scope
         highlight = "IndentBlanklineChar", -- Use same highlight group for scope guides
+        show_exact_scope = true            -- Enable the exact scope number
       },
     })
 

@@ -21,8 +21,8 @@ return {
 
         -- Maximum allowed scroll delta before instant jump instead of smooth scroll
         max_delta = {
-          line = 100,   -- Max lines to scroll smoothly, beyond this jumps instantly
-          column = 150, -- Max columns to scroll smoothly, beyond this jumps instantly
+          line = 50,   -- Max lines to scroll smoothly, beyond this jumps instantly
+          column = 50, -- Max columns to scroll smoothly, beyond this jumps instantly
         },
       },
     })
@@ -30,7 +30,7 @@ return {
     local scroll_opts = {
       delay = 7,
       step_size = { horizontal = 1 },
-      max_delta = { line = 100, column = 150 },
+      max_delta = { line = 50, column = 50 },
       mode = "cursor", -- Can be "cursor", or "window"
     }
 
