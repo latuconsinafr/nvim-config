@@ -19,7 +19,7 @@ return {
       shading_factor = 2,       -- Degree of shading (1-3)
       start_in_insert = true,   -- Start terminal in insert mode
       insert_mappings = true,   -- Allow terminal to be closed in insert mode with the configured toggle key
-      persist_size = true,     -- Retain terminal size across sessions
+      persist_size = true,      -- Retain terminal size across sessions
       persist_mode = true,
       direction = 'horizontal', -- Choose between 'horizontal', 'vertical', 'tab', or 'float'
       close_on_exit = true,     -- Close the terminal when the process exits
@@ -33,6 +33,7 @@ return {
     -- Terminal mode mappings
     function _G.set_terminal_keymaps()
       local opts = { buffer = 0 }
+
       map('t', '<esc>', [[<C-\><C-n>]], opts)
       map('t', 'jk', [[<C-\><C-n>]], opts)
       map('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
@@ -43,6 +44,6 @@ return {
     end
 
     -- Apply terminal keymaps
-    vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+    vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
   end,
 }

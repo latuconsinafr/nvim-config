@@ -26,5 +26,25 @@ return {
         },
       },
     })
+    -- Define scroll options explicitlyAdd commentMore actions
+    local scroll_opts = {
+      delay = 7,
+      step_size = { horizontal = 1 },
+      max_delta = { line = 100, column = 150 },
+      mode = "cursor", -- Can be "cursor", or "window"
+    }
+
+    -- Custom keymaps for animated word motionsAdd commentMore actions
+    vim.keymap.set("n", "w", function()
+      cinnamon.scroll("w", scroll_opts)
+    end, { noremap = true, silent = true })
+
+    vim.keymap.set("n", "b", function()
+      cinnamon.scroll("b", scroll_opts)
+    end, { noremap = true, silent = true })
+
+    vim.keymap.set("n", "e", function()
+      cinnamon.scroll("e", scroll_opts)
+    end, { noremap = true, silent = true })
   end,
 }
