@@ -101,7 +101,7 @@ return {
           show_tab_indicators = true,      -- Show small indicator for active buffer
           show_duplicate_prefix = true,    -- Show file path prefix when there are duplicate filenames
 
-          separator_style = "padded_slope", -- Can be "slant", "thick", "thin", or custom list
+          separator_style = "padded_slant", -- Can be "slant", "thick", "thin", or custom list
 
           -- Style presets: disable italics and bold text
           style_preset = {
