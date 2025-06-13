@@ -16,22 +16,6 @@ return {
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },
-      winbar = {
-        lualine_a = {
-          {
-            'filename',
-            file_status = true, -- Shows [Modified], [Readonly]
-            newfile_status = true, -- Show [New] for new files
-            path = 1, -- 0 = just filename, 1 = relative path
-            symbols = {
-              modified = ' ●', -- Text to show when the file is modified
-              readonly = ' ', -- Icon for readonly
-              unnamed = '[No Name]',
-              newfile = '[New]',
-            }
-          }
-        }
-      }
     }
   end,
 }

@@ -1,21 +1,11 @@
 return {
   "nvim-tree/nvim-tree.lua", -- The main nvim-tree plugin repo
   version = "*",             -- Use the latest stable version
-  lazy = false,              -- Load this plugin eagerly on startup (not lazily)
+  lazy = false,              -- Load this plugin eagerly on startup
 
   -- Dependency on nvim-web-devicons for file/folder icons
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-  },
-
-  -- Load the plugin when these commands are called (helps lazy loading)
-  cmd = { "NvimTreeToggle", "NvimTreeRefresh", "NvimTreeFindFile" },
-
-  -- Key mappings for nvim-tree functionality with descriptions
-  keys = {
-    { "<leader>tt", "<cmd>NvimTreeToggle<cr>",   desc = "Toggle Nvim Tree" },       -- Toggle file explorer
-    { "<leader>tr", "<cmd>NvimTreeRefresh<cr>",  desc = "Refresh Nvim Tree" },      -- Refresh tree contents
-    { "<leader>tf", "<cmd>NvimTreeFindFile<cr>", desc = "Find File in Nvim Tree" }, -- Focus on current file
   },
 
   -- Plugin configuration function, runs when plugin is loaded
@@ -58,5 +48,10 @@ return {
         timeout = 500,  -- Timeout for git commands in milliseconds
       },
     }
+
+    -- Set keymaps explicitly (eagerly)
+    vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
+    vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh Nvim Tree" })
+    vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Find File in Nvim Tree" })
   end,
 }
