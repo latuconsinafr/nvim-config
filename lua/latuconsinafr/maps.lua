@@ -50,10 +50,24 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Find and replace word
-vim.keymap.set("n", "<leader>fr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>frc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>sr", [[:%s//gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>src", [[:.,$s//gc<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rwc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rg", [[:%s//gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rgc", [[:.,$s//gc<Left><Left><Left>]])
+
+vim.keymap.set("v", "<leader>rs", function()
+  vim.cmd('normal! "vy')
+  local text = vim.fn.getreg("v")
+  text = vim.fn.escape(text, [[\/]])
+  vim.cmd('normal! :%s/' .. text .. '/' .. text .. '/gI')
+end, { desc = "Replace selected text globally" })
+
+vim.keymap.set("v", "<leader>rsc", function()
+  vim.cmd('normal! "vy')
+  local text = vim.fn.getreg("v")
+  text = vim.fn.escape(text, [[\/]])
+  vim.cmd('normal! :%s/' .. text .. '/' .. text .. '/gc')
+end, { desc = "Replace selected text with confirm" })
 
 -- Find and delete
 vim.keymap.set("n", "<leader>fd", [[:g/\<C-r><C-w\>/d<CR>]])

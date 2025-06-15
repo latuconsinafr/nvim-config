@@ -60,6 +60,22 @@ return {
           "preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up",
         },
       },
+
+      actions = {
+        files = {
+          -- default enter behavior: open file(s)
+          ["default"] = require("fzf-lua.actions").file_edit_or_qf,
+          -- ctrl-q to quickfix
+          ["ctrl-q"] = function(selected)
+            local qf_entries = {}
+            for _, file in ipairs(selected) do
+              table.insert(qf_entries, { filename = file })
+            end
+            vim.fn.setqflist({}, ' ', { title = 'FzfLua Selected Files', items = qf_entries })
+            vim.cmd("copen")
+          end
+        }
+      }
     })
   end,
 }

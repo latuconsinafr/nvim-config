@@ -60,10 +60,15 @@ return {
 
       bufferline.setup({
         options = {
-          mode = "buffers",               -- Use buffers instead of tabs
-          numbers = "none",               -- No buffer numbers shown
-          themeable = true,               -- Automatically adapts to your current colorscheme
-          close_command = false,          -- Disable close buttons per buffer
+          -- custom_filter = function(bufnr)
+          --   local filetype = vim.bo[bufnr].filetype
+          --   -- Hide quickfix and any other unwanted filetypes
+          --   return filetype ~= "qf"
+          -- end,
+          mode = "buffers",      -- Use buffers instead of tabs
+          numbers = "none",      -- No buffer numbers shown
+          themeable = true,      -- Automatically adapts to your current colorscheme
+          close_command = false, -- Disable close buttons per buffer
           middle_mouse_command = false,
           left_mouse_command = false,
           right_mouse_command = false,
@@ -74,14 +79,14 @@ return {
             style = 'icon',
           },
 
-          modified_icon = '● ',           -- Shown when buffer is modified
-          left_trunc_marker = ' ',       -- Shown when buffer name is truncated
+          modified_icon = '● ', -- Shown when buffer is modified
+          left_trunc_marker = ' ', -- Shown when buffer name is truncated
           right_trunc_marker = ' ',
-          max_name_length = 18,           -- Max buffer name shown
-          max_prefix_length = 15,         -- Max prefix (used when buffers have same name)
-          truncate_names = true,          -- Truncate long names
+          max_name_length = 18, -- Max buffer name shown
+          max_prefix_length = 15, -- Max prefix (used when buffers have same name)
+          truncate_names = true, -- Truncate long names
 
-          diagnostics = "nvim_lsp",       -- Show LSP diagnostics in tabs
+          diagnostics = "nvim_lsp", -- Show LSP diagnostics in tabs
 
           -- Offset config to integrate nicely with NvimTree
           offsets = {
@@ -94,12 +99,12 @@ return {
             },
           },
 
-          color_icons = true,             -- Use color icons (requires web-devicons)
+          color_icons = true,               -- Use color icons (requires web-devicons)
           show_buffer_icons = true,
-          show_buffer_close_icons = false, -- Hide individual buffer close icons
-          show_close_icon = false,         -- Hide global close icon
-          show_tab_indicators = true,      -- Show small indicator for active buffer
-          show_duplicate_prefix = true,    -- Show file path prefix when there are duplicate filenames
+          show_buffer_close_icons = false,  -- Hide individual buffer close icons
+          show_close_icon = false,          -- Hide global close icon
+          show_tab_indicators = true,       -- Show small indicator for active buffer
+          show_duplicate_prefix = true,     -- Show file path prefix when there are duplicate filenames
 
           separator_style = "padded_slant", -- Can be "slant", "thick", "thin", or custom list
 
@@ -127,10 +132,9 @@ return {
       end
 
       -- Smart close current buffer
-      vim.keymap.set("n", "<leader>bq", function()
+      vim.keymap.set("n", "<leader>bd", function()
         smart_buf_delete(vim.api.nvim_get_current_buf())
       end, { desc = "Smart buffer delete" })
     end
   },
 }
-
