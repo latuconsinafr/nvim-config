@@ -17,20 +17,20 @@ return {
 
       -- Additional scrolling options
       options = {
-        delay = 7, -- Delay in milliseconds between scroll steps (smoothness)
+        delay = 5, -- Delay in milliseconds between scroll steps (smoothness)
 
         -- Maximum allowed scroll delta before instant jump instead of smooth scroll
         max_delta = {
-          line = 50,   -- Max lines to scroll smoothly, beyond this jumps instantly
-          column = 50, -- Max columns to scroll smoothly, beyond this jumps instantly
+          line = 50,      -- Max lines to scroll smoothly, beyond this jumps instantly
+          column = false, -- Max columns to scroll smoothly, beyond this jumps instantly
         },
       },
     })
     -- Define scroll options explicitlyAdd commentMore actions
     local scroll_opts = {
-      delay = 7,
+      delay = 5,
       step_size = { horizontal = 1 },
-      max_delta = { line = 50, column = 50 },
+      max_delta = { line = false, column = false },
       mode = "cursor", -- Can be "cursor", or "window"
     }
 

@@ -49,9 +49,39 @@ return {
       },
     }
 
+    local api            = require("nvim-tree.api")
+    local view_module    = require("nvim-tree.view")
+    local original_width = 30
+    local step           = 10
+
+    -- Helper to ensure tree is open
+    local function ensure_open()
+      if not view_module.is_visible() then
+        api.tree.open()
+      end
+    end
+
+    -- Increase by `step`, up to vim.o.columns
+    local function grow_tree()
+      ensure_open()
+      local cur = view_module.View.width or original_width
+      local nw  = math.min(vim.o.columns, cur + step)
+      view_module.resize(nw)
+    end
+
+    -- Decrease by `step`, but never below `original_width`
+    local function shrink_tree()
+      ensure_open()
+      local cur = view_module.View.width or original_width
+      local nw  = math.max(original_width, cur - step)
+      view_module.resize(nw)
+    end
+
     -- Set keymaps explicitly (eagerly)
     vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
     vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh Nvim Tree" })
     vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Find File in Nvim Tree" })
+    vim.keymap.set("n", "<leader>t]", grow_tree, { desc = "Grow Nvim‑Tree by 10 cols" })
+    vim.keymap.set("n", "<leader>t[", shrink_tree, { desc = "Shrink Nvim‑Tree by 10 cols (min 30)" })
   end,
 }

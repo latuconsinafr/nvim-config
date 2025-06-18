@@ -39,3 +39,11 @@ vim.opt.fillchars = { eob = ' ' }
 -- Configure spell capabilities
 vim.opt.spell = true
 vim.opt.spelllang = { "en_gb" }
+
+-- Clear any half‑typed keys on focus gain, without leaving your current mode
+vim.api.nvim_create_autocmd("FocusGained", {
+  callback = function()
+    -- Flush type‑ahead but don’t send an actual <Esc>
+    vim.fn.feedkeys("", "nx")
+  end,
+})
