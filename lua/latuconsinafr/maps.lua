@@ -60,4 +60,4 @@ vim.keymap.set("n", "<leader>fd", [[:g/\<C-r><C-w\>/d<CR>]])
 vim.keymap.set("n", "<leader>sd", [[:g//d<Left><Left>]])
 
 -- Force reload current file
-vim.keymap.set('n', '<leader>r', ':e!<CR>')
+vim.keymap.set('n', '<leader>rr', ':e!<CR>')

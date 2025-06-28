@@ -1,6 +1,7 @@
 return {
   "nvzone/showkeys",
-  event = "VeryLazy",
+  version = "*",
+  lazy = false,
   config = function()
     -- Setup plugin
     require("showkeys").setup({
@@ -16,7 +17,7 @@ return {
 
       winhl = "FloatBorder:Comment,Normal:Normal",
 
-      timeout = 1, -- in seconds
+      timeout = 3, -- in seconds
       maxkeys = 3,
       show_count = true,
       excluded_modes = { "i" }, -- don't show in insert mode
@@ -38,6 +39,9 @@ return {
         ["<C>"] = "Ctrl",
       },
     })
+
+    -- Auto-show
+    require('showkeys').open()
 
     vim.keymap.set("n", "<leader>sk", function()
       require("showkeys").toggle()
