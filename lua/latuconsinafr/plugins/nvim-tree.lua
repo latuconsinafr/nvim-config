@@ -14,7 +14,7 @@ return {
       sort_by = "case_sensitive", -- Sort files/folders case sensitively
 
       view = {
-        width = 30, -- Set the width of the nvim-tree sidebar
+        width = 40, -- Set the width of the nvim-tree sidebar
       },
 
       renderer = {

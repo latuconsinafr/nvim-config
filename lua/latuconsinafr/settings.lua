@@ -39,15 +39,3 @@ vim.opt.fillchars = { eob = ' ' }
 -- Configure spell capabilities
 vim.opt.spell = true
 vim.opt.spelllang = { "en_gb" }
-
--- Clear any half‑typed keys on focus gain, without leaving your current mode
-vim.api.nvim_create_autocmd("FocusGained", {
-  callback = function()
-    -- Only do this if you're not in insert or terminal mode
-    local mode = vim.api.nvim_get_mode().mode
-    if mode:match("^[noV]") then
-      -- Send <C-\><C-n> to cancel pending keys (acts like <Esc> but safer)
-      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
-    end
-  end,
-})

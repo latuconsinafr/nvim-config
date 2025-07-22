@@ -3,6 +3,9 @@ return {
   "declancm/cinnamon.nvim",
   version = "*", -- Use the latest release version
 
+  -- Enabled/Disabled
+  enabled = true,
+
   -- Configuration function that runs after the plugin is loaded
   config = function()
     -- Load cinnamon module and setup with custom options
@@ -21,20 +24,26 @@ return {
 
         -- Maximum allowed scroll delta before instant jump instead of smooth scroll
         max_delta = {
-          line = 50,      -- Max lines to scroll smoothly, beyond this jumps instantly
+          line = 30,   -- Max lines to scroll smoothly, beyond this jumps instantly
           column = false, -- Max columns to scroll smoothly, beyond this jumps instantly
         },
       },
     })
-    -- Define scroll options explicitlyAdd commentMore actions
+
+    -- Define scroll options explicitly
     local scroll_opts = {
       delay = 5,
-      step_size = { horizontal = 1 },
-      max_delta = { line = false, column = false },
+      step_size = {
+        -- Number of cursor/window lines moved per step
+        vertical = 1,
+        -- Number of cursor/window columns moved per step
+        horizontal = 2,
+      },
+      max_delta = { line = 30, column = false },
       mode = "cursor", -- Can be "cursor", or "window"
     }
 
-    -- Custom keymaps for animated word motionsAdd commentMore actions
+    -- Custom keymaps for animated word motions
     vim.keymap.set("n", "w", function()
       cinnamon.scroll("w", scroll_opts)
     end, { noremap = true, silent = true })

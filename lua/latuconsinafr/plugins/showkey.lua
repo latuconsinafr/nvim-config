@@ -41,7 +41,7 @@ return {
     })
 
     -- Auto-show
-    require('showkeys').open()
+    -- require('showkeys').open()
 
     vim.keymap.set("n", "<leader>sk", function()
       require("showkeys").toggle()

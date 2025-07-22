@@ -300,11 +300,35 @@ return {
         }
       })
 
+      -- Explicit setup for `rust-analyzer`
+      lspconfig.rust_analyzer.setup({
+        on_attach = function(client, bufnr)
+          on_attach(client, bufnr) -- reuse your shared config
+
+          -- Auto-format Rust on save
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format({ async = false })
+            end,
+          })
+        end,
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              command = "clippy",
+            },
+          },
+        },
+
+      })
       -- Servers to skip due to explicit setup
       local servers_to_skip = {
         "lua_ls",
         "ts_ls",
-        "eslint"
+        "eslint",
+        "rust_analyzer"
       }
 
       -- Configure mason-lspconfig auto-installs and sets up all the rest
