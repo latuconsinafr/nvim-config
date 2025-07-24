@@ -21,7 +21,7 @@ return {
       insert_mappings = true,   -- Allow terminal to be closed in insert mode with the configured toggle key
       persist_size = true,      -- Retain terminal size across sessions
       persist_mode = true,
-      direction = 'horizontal', -- Choose between 'horizontal', 'vertical', 'tab', or 'float'
+      direction = 'float', -- Choose between 'horizontal', 'vertical', 'tab', or 'float'
       close_on_exit = true,     -- Close the terminal when the process exits
       shell = vim.o.shell,
       auto_scroll = true,

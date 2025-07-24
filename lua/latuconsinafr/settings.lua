@@ -39,3 +39,6 @@ vim.opt.fillchars = { eob = ' ' }
 -- Configure spell capabilities
 vim.opt.spell = true
 vim.opt.spelllang = { "en_gb" }
+
+-- Color column
+vim.opt.colorcolumn = '100'
