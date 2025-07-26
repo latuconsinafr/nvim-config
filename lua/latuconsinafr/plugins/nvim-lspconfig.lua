@@ -121,6 +121,12 @@ return {
     end,
   },
 
+  -- Schema store
+  {
+    "b0o/schemastore.nvim",
+    lazy = true
+  },
+
   -- Mason: Package manager for LSP servers, DAP servers, linters, and formatters
   {
     "williamboman/mason.nvim",
@@ -250,6 +256,34 @@ return {
         }
       })
 
+      -- Explicit setup for `jsonls`
+      lspconfig.jsonls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      })
+
+      -- Explicit setup for `yamlls`
+      lspconfig.yamlls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          yaml = {
+            keyOrdering = false,
+            format = { enable = true },
+            validate = true,
+            hover = true,
+            completion = true,
+            schemas = require("schemastore").yaml.schemas(), -- Optional but very helpful
+          },
+        },
+      })
+
       -- Explicit setup for `eslint`
       lspconfig.eslint.setup({
         on_attach = function(client, bufnr)
@@ -326,6 +360,8 @@ return {
       -- Servers to skip due to explicit setup
       local servers_to_skip = {
         "lua_ls",
+        "jsonls",
+        "yamlls",
         "ts_ls",
         "eslint",
         "rust_analyzer"

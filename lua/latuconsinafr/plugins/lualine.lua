@@ -16,6 +16,22 @@ return {
       sections = {
         lualine_a = {
           { 'mode' },
+          -- Since noice hide the recording message, so yeah
+          {
+            function()
+              local ok, noice = pcall(require, "noice")
+              if not ok then return "" end
+
+              if noice.api.statusline.mode.has() then
+                local msg = noice.api.statusline.mode.get()
+                local recording = msg:match("recording @%a")
+
+                -- Only show recording or empty
+                return recording or ""
+              end
+              return ""
+            end,
+          },
         },
         lualine_b = {
           { 'branch',     cond = hide_below(100) },
