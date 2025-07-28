@@ -73,7 +73,11 @@ return {
             end
             vim.fn.setqflist({}, ' ', { title = 'FzfLua Selected Files', items = qf_entries })
             vim.cmd("copen")
-          end
+          end,
+          -- copy to clipboard using <C-y>
+          ["ctrl-y"] = function(selected)
+            vim.fn.setreg("+", selected[1]) -- to system clipboard
+          end,
         }
       }
     })
