@@ -65,11 +65,11 @@ return {
           --   -- Hide quickfix and any other unwanted filetypes
           --   return filetype ~= "qf"
           -- end,
-          mode = "buffers",      -- Use buffers instead of tabs
-          numbers = "none",      -- No buffer numbers shown
-          themeable = true,      -- Automatically adapts to your current colorscheme
-          close_command = false, -- Disable close buttons per buffer
-          middle_mouse_command = false,
+          mode = "buffers",                     -- Use buffers instead of tabs
+          numbers = "none",                     -- No buffer numbers shown
+          themeable = true,                     -- Automatically adapts to your current colorscheme
+          close_command = false,        -- can be a string | function, | false see "Mouse actions"
+          middle_mouse_command = false, -- can be a string | function, | false see "Mouse actions"
           left_mouse_command = false,
           right_mouse_command = false,
 
@@ -79,12 +79,14 @@ return {
             style = 'icon',
           },
 
+          buffer_close_icon = '',
           modified_icon = '● ', -- Shown when buffer is modified
           left_trunc_marker = ' ', -- Shown when buffer name is truncated
           right_trunc_marker = ' ',
-          max_name_length = 18, -- Max buffer name shown
-          max_prefix_length = 15, -- Max prefix (used when buffers have same name)
-          truncate_names = true, -- Truncate long names
+          tab_size = 12,
+          max_name_length = 15,     -- Max buffer name shown
+          max_prefix_length = 12,   -- Max prefix (used when buffers have same name)
+          truncate_names = true,    -- Truncate long names
 
           diagnostics = "nvim_lsp", -- Show LSP diagnostics in tabs
 
@@ -101,10 +103,11 @@ return {
 
           color_icons = true,               -- Use color icons (requires web-devicons)
           show_buffer_icons = true,
-          show_buffer_close_icons = false,  -- Hide individual buffer close icons
+          show_buffer_close_icons = true,   -- Hide individual buffer close icons
           show_close_icon = false,          -- Hide global close icon
           show_tab_indicators = true,       -- Show small indicator for active buffer
           show_duplicate_prefix = true,     -- Show file path prefix when there are duplicate filenames
+          persist_buffer_sort = true,       -- whether or not custom sorted buffers should persist
 
           separator_style = "padded_slant", -- Can be "slant", "thick", "thin", or custom list
 
@@ -115,15 +118,20 @@ return {
           }
         },
 
-        -- No custom highlights defined — we let `themeable = true` handle that automatically.
+        -- Custom highlights defined — if not defined, we let `themeable = true` handle that automatically.
         -- If you switch themes, bufferline will follow along.
+        highlights = {
+          buffer_selected = {
+            bold = true,
+          },
+        }
       })
 
       -- Keymaps for navigation and buffer actions
       vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
       vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
       vim.keymap.set("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Pick buffer" })
-      vim.keymap.set("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close all other buffers" })
+      vim.keymap.set("n", "<leader>bP", "<cmd>BufferLineTogglePin<CR>", { desc = "Toggle buffer pin" })
 
       -- Go to buffer 1–9
       for i = 1, 9 do
@@ -136,6 +144,16 @@ return {
       vim.keymap.set("n", "<leader>bd", function()
         smart_buf_delete(vim.api.nvim_get_current_buf())
       end, { desc = "Smart buffer delete" })
+
+      -- Close all other buffer except current 
+      vim.keymap.set("n", "<leader>bdo", "<cmd>BufferLineCloseOthers<CR>",
+        { desc = "Close all other buffers" })
+      -- Close all visible buffers to the right of the current buffer
+      vim.keymap.set("n", "<leader>bdl", "<cmd>BufferLineCloseRight<CR>",
+        { desc = "Close all visible buffers to the right of the current buffer" })
+      -- Close all visible buffers to the left of the current buffer
+      vim.keymap.set("n", "<leader>bdh", "<cmd>BufferLineCloseLeft<CR>",
+        { desc = "Close all visible buffers to the left of the current buffer" })
     end
   },
 }
