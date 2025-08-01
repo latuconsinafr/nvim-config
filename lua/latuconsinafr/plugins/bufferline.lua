@@ -65,13 +65,13 @@ return {
           --   -- Hide quickfix and any other unwanted filetypes
           --   return filetype ~= "qf"
           -- end,
-          mode = "buffers",                     -- Use buffers instead of tabs
-          numbers = "none",                     -- No buffer numbers shown
-          themeable = true,                     -- Automatically adapts to your current colorscheme
-          close_command = false,        -- can be a string | function, | false see "Mouse actions"
-          middle_mouse_command = false, -- can be a string | function, | false see "Mouse actions"
-          left_mouse_command = false,
-          right_mouse_command = false,
+          mode = "buffers",                    -- Use buffers instead of tabs
+          numbers = "none",                    -- No buffer numbers shown
+          themeable = true,                    -- Automatically adapts to your current colorscheme
+          close_command = "bdelete! %d",       -- can be a string | function, | false see "Mouse actions"
+          right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
+          left_mouse_command = "buffer %d",    -- can be a string | function, | false see "Mouse actions"
+          middle_mouse_command = nil,          -- can be a string | function, | false see "Mouse actions"
 
           -- Buffer active indicator (left of buffer name)
           indicator = {
@@ -79,7 +79,7 @@ return {
             style = 'icon',
           },
 
-          buffer_close_icon = '',
+          buffer_close_icon = '󰅖',
           modified_icon = '● ', -- Shown when buffer is modified
           left_trunc_marker = ' ', -- Shown when buffer name is truncated
           right_trunc_marker = ' ',
@@ -141,11 +141,11 @@ return {
       end
 
       -- Smart close current buffer
-      vim.keymap.set("n", "<leader>bd", function()
+      vim.keymap.set("n", "<leader>bdc", function()
         smart_buf_delete(vim.api.nvim_get_current_buf())
       end, { desc = "Smart buffer delete" })
 
-      -- Close all other buffer except current 
+      -- Close all other buffer except current
       vim.keymap.set("n", "<leader>bdo", "<cmd>BufferLineCloseOthers<CR>",
         { desc = "Close all other buffers" })
       -- Close all visible buffers to the right of the current buffer
