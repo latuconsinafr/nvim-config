@@ -15,7 +15,10 @@ return {
     { "<leader>fr",  "<cmd>FzfLua oldfiles<CR>",        desc = "Recent Files" },           -- Recently opened files
     { "<leader>ft",  "<cmd>FzfLua grep_cword<CR>",      desc = "Grep word under cursor" }, -- Grep for word under cursor
   },
+
   config = function()
+    local actions = require("fzf-lua.actions")
+
     require("fzf-lua").setup({
       -- Window appearance configuration
       winopts = {
@@ -55,29 +58,38 @@ return {
           -- Scroll preview window down faster (10 lines at a time)
           ["ctrl-d"] =
           "preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down",
+
           -- Scroll preview window up faster (10 lines at a time)
           ["ctrl-u"] =
           "preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up",
+
+          -- Select all
+          ["ctrl-a"] = "toggle-all",
         },
       },
 
       actions = {
         files = {
-          -- default enter behavior: open file(s)
-          ["default"] = require("fzf-lua.actions").file_edit_or_qf,
-          -- ctrl-q to quickfix
-          ["ctrl-q"] = function(selected)
-            local qf_entries = {}
-            for _, file in ipairs(selected) do
-              table.insert(qf_entries, { filename = file })
-            end
-            vim.fn.setqflist({}, ' ', { title = 'FzfLua Selected Files', items = qf_entries })
-            vim.cmd("copen")
-          end,
+          -- Default enter behavior: open file(s)
+          ["default"] = actions.file_edit,
+
+          -- Send to quickfix, current or selected
+          ["ctrl-q"] = actions.file_sel_to_qf,
+
           -- copy to clipboard using <C-y>
           ["ctrl-y"] = function(selected)
-            vim.fn.setreg("+", selected[1]) -- to system clipboard
-          end,
+            local cleaned = {}
+
+            for _, line in ipairs(selected) do
+              local path = line:match("[%w%./~%-_]+.*")
+              table.insert(cleaned, path)
+            end
+
+            local text = table.concat(cleaned, "\n")
+
+            vim.fn.setreg("+", text)
+            vim.notify("Copied " .. #cleaned .. " selected item(s) to clipboard", vim.log.levels.INFO)
+          end
         }
       }
     })
