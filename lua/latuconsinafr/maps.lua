@@ -71,10 +71,12 @@ end, { desc = "Toggle quickfix window" })
 
 -- Search & Replace
 -- Replace current word globally (no confirm)
-vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word (global)" })
+vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Replace word (global)" })
 
 -- Replace current word from cursor to EOF (confirm)
-vim.keymap.set("n", "<leader>rwc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]], { desc = "Replace word (confirm from here)" })
+vim.keymap.set("n", "<leader>rwc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]],
+  { desc = "Replace word (confirm from here)" })
 
 -- Replace arbitrary word globally (manual input)
 vim.keymap.set("n", "<leader>rg", [[:%s//gI<Left><Left><Left>]], { desc = "Replace (manual global)" })
@@ -82,21 +84,29 @@ vim.keymap.set("n", "<leader>rg", [[:%s//gI<Left><Left><Left>]], { desc = "Repla
 -- Replace arbitrary word with confirm from cursor to EOF
 vim.keymap.set("n", "<leader>rgc", [[:.,$s//gc<Left><Left><Left>]], { desc = "Replace (manual confirm)" })
 
--- Replace current word across all quickfix files
-vim.keymap.set("n", "<leader>rq", [[:cfdo %s/\<<C-r><C-w>\>/<C-r><C-w>/gI | update<CR>]], { desc = "Replace word in quickfix (all)" })
+-- Replace only in quickfix lines (manual input - simple prompt)
+vim.keymap.set("n", "<leader>rq",
+  [[:cdo s//g | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+  { desc = "Replace in quickfix lines only (manual)" })
 
--- Replace with confirmation in quickfix files
-vim.keymap.set("n", "<leader>rqc", [[:cfdo %s/\<<C-r><C-w>\>/<C-r><C-w>/gc | update<CR>]], { desc = "Replace word in quickfix (confirm)" })
+-- Replace only in quickfix lines with confirmation (manual input)
+vim.keymap.set("n", "<leader>rqc",
+  [[:cdo s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+  { desc = "Replace in quickfix lines only (manual confirm)" })
 
 -- Replace arbitrary pattern globally in quickfix
-vim.keymap.set("n", "<leader>rqg", [[:cfdo %s//gI | update<Left><Left><Left><Left><Left><Left><Left>]], { desc = "Replace in quickfix (manual global)" })
+vim.keymap.set("n", "<leader>rqg",
+  [[:cfdo %s//gI | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+  { desc = "Replace in quickfix (manual global)" })
 
 -- Replace arbitrary pattern with confirm in quickfix
-vim.keymap.set("n", "<leader>rqgc", [[:cfdo %s//gc | update<Left><Left><Left><Left><Left>]], { desc = "Replace in quickfix (manual confirm)" })
+vim.keymap.set("n", "<leader>rqgc",
+  [[:cfdo %s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+  { desc = "Replace in quickfix (manual confirm)" })
 
 -- Find & Delete
 -- Delete all lines containing current word
-vim.keymap.set("n", "<leader>fd", [[:g/\<C-r><C-w\>/d<CR>]], { desc = "Delete lines containing word" })
+vim.keymap.set("n", "<leader>dw", [[:g/\<<C-r><C-w>\>/d<CR>]], { desc = "Delete lines containing word" })
 
--- Delete all lines containing last search match
-vim.keymap.set("n", "<leader>sd", [[:g//d<Left><Left>]], { desc = "Delete lines matching search" })
+-- Delete all lines matching last search
+vim.keymap.set("n", "<leader>df", [[:g//d<Left><Left>]], { desc = "Delete lines matching search" })

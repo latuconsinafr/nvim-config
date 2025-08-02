@@ -22,15 +22,23 @@ return {
     require("fzf-lua").setup({
       -- Window appearance configuration
       winopts = {
-        height = 0.85,         -- 85% of the editor height
-        width = 0.85,          -- 85% of the editor width
-        row = 0.35,            -- Vertical position (top=0, bottom=1)
-        col = 0.5,             -- Horizontal position (left=0, right=1)
-        border = "rounded",    -- Rounded border style
+        height = 0.85,           -- 85% of the editor height
+        width = 0.85,            -- 85% of the editor width
+        row = 0.35,              -- Vertical position (top=0, bottom=1)
+        col = 0.5,               -- Horizontal position (left=0, right=1)
+        border = "rounded",      -- Rounded border style
         preview = {
-          default = "bat",     -- Use `bat` (if installed) for syntax-highlighted preview
-          border = "noborder", -- No border around the preview window
+          default   = "builtin", -- override the default previewer?, default uses the 'builtin' previewer
+          border    = "rounded", -- No border around the preview window
+          scrollbar = "float",   -- `false` or string:'float|border'
+          scrolloff = -1,        -- float scrollbar offset from right
         },
+      },
+
+      -- Preview scroll key settings
+      preview_scroll = {
+        up = "<C-u>",
+        down = "<C-d>",
       },
 
       -- File search configuration
@@ -54,12 +62,16 @@ return {
 
       -- Key mappings for preview scrolling (fzf native bindings)
       keymap = {
+        builtin = {
+          ["<C-d>"] = "preview-page-down",
+          ["<C-u>"] = "preview-page-up",
+        },
         fzf = {
-          -- Scroll preview window down faster (10 lines at a time)
+          -- Scroll preview window down faster (10 lines at a time), only works when using non-builtin preview
           ["ctrl-d"] =
           "preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down+preview-down",
 
-          -- Scroll preview window up faster (10 lines at a time)
+          -- Scroll preview window up faster (10 lines at a time), only works when using non-builtin preview
           ["ctrl-u"] =
           "preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up+preview-up",
 
