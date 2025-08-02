@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 -- Source the entire init.lua config
 vim.keymap.set('n', '<leader>sv', ':source ~/.config/nvim/init.lua<CR>', { silent = true, desc = "Source init.lua" })
 
--- Source current file (shortcut for quick testing)
+-- Source current file (shortcut for quick setting)
 vim.keymap.set("n", "<leader><leader>", function()
   vim.cmd("so")
 end, { desc = "Source current file" })
@@ -86,12 +86,12 @@ vim.keymap.set("n", "<leader>rgc", [[:.,$s//gc<Left><Left><Left>]], { desc = "Re
 
 -- Replace only in quickfix lines (manual input - simple prompt)
 vim.keymap.set("n", "<leader>rq",
-  [[:cdo s//g | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+  [[:cdo s//g | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
   { desc = "Replace in quickfix lines only (manual)" })
 
 -- Replace only in quickfix lines with confirmation (manual input)
 vim.keymap.set("n", "<leader>rqc",
-  [[:cdo s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+  [[:cdo s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
   { desc = "Replace in quickfix lines only (manual confirm)" })
 
 -- Replace arbitrary pattern globally in quickfix
