@@ -60,11 +60,14 @@ return {
 
       bufferline.setup({
         options = {
-          -- custom_filter = function(bufnr)
-          --   local filetype = vim.bo[bufnr].filetype
-          --   -- Hide quickfix and any other unwanted filetypes
-          --   return filetype ~= "qf"
-          -- end,
+          custom_filter = function(bufnr)
+            local filetype = vim.bo[bufnr].filetype
+            local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+            -- Hide quickfix, and any unwanted non-file buffers
+            return filetype ~= "qf" and bufname ~= ""
+          end,
+
           mode = "buffers",                    -- Use buffers instead of tabs
           numbers = "none",                    -- No buffer numbers shown
           themeable = true,                    -- Automatically adapts to your current colorscheme
