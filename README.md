@@ -76,7 +76,7 @@ More sections coming soon including plugin management, key mappings, language su
 
 ## 📦 Plugins & Setup
 
-This config integrates with a rich collection of plugins for enhanced functionality, appearance, and developer experience. Plugin keybindings are managed in separate config files located in `lua/plugins/`.
+This config integrates with a rich collection of plugins for enhanced functionality, appearance, and developer experience. Plugin keybindings are managed in separate config files located in `lua/latuconsinafr/plugins/`.
 
 ### Plugin Highlights:
 
@@ -88,7 +88,7 @@ This config integrates with a rich collection of plugins for enhanced functional
 * **Visuals**: `colorizer`, `nvim-web-devicons`, `indent-blankline`, `nvim-ufo`
 * **Motion**: `cinnamon.nvim` — smooth scrolling with custom easing
 
-Each plugin is lazily loaded and configured individually using `lazy.nvim`. Explore each plugin’s config in `lua/plugins/` to see custom behaviors and mappings.
+Each plugin is lazily loaded and configured individually using `lazy.nvim`. Explore each plugin’s config in `lua/latuconsinafr/plugins/` to see custom behaviors and mappings.
 
 ---
 
