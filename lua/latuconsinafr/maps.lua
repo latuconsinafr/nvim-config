@@ -69,6 +69,44 @@ vim.keymap.set("n", "<leader>qq", function()
   vim.cmd("copen")
 end, { desc = "Toggle quickfix window" })
 
+-- Replace quickfix item
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    -- Map `dd` locally in the quickfix window
+    vim.keymap.set("n", "dd", function()
+      -- 1) Which line the cursor is on? (1-based)
+      local qf_line = vim.fn.line(".")
+
+      -- 2) Get the entire quickfix list
+      local qflist = vim.fn.getqflist()
+
+      -- 3) Remove that entry from the Lua list (0-based index)
+      table.remove(qflist, qf_line)
+
+      -- 4) Replace the quickfix list with our new one
+      --    Use the {} + 'r' + { items = ... } form
+      vim.fn.setqflist({}, "r", { items = qflist })
+
+      -- 5) Re-open the quickfix window so it redraws
+      vim.cmd("copen")
+
+      -- 6) Jump cursor to the same line number (or last line if we removed the last)
+      local new_qf_count = #qflist
+      if new_qf_count == 0 then
+        -- nothing left
+        return
+      end
+
+      -- clamp the cursor between 1 and new_qf_count
+      local new_line = math.min(qf_line, new_qf_count)
+      vim.api.nvim_win_set_cursor(0, { new_line, 0 })
+    end, {
+      buffer = true,
+      desc   = "Remove this entry from the quickfix list",
+    })
+  end,
+})
 -- Search & Replace
 -- Replace current word globally (no confirm)
 vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
