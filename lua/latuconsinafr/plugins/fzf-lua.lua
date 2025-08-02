@@ -32,6 +32,9 @@ return {
           border    = "rounded", -- No border around the preview window
           scrollbar = "float",   -- `false` or string:'float|border'
           scrolloff = -1,        -- float scrollbar offset from right
+          winopts   = {
+            signcolumn = "yes",
+          }
         },
       },
 
