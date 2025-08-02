@@ -1,63 +1,102 @@
+-- General & File Operations
 -- Set the leader key
 vim.g.mapleader = " "
 
--- Source the init.lua
-vim.keymap.set('n', '<leader>sv', ':source ~/.config/nvim/init.lua<CR>', { silent = true })
+-- Source the entire init.lua config
+vim.keymap.set('n', '<leader>sv', ':source ~/.config/nvim/init.lua<CR>', { silent = true, desc = "Source init.lua" })
 
--- Source current file
+-- Source current file (shortcut for quick testing)
 vim.keymap.set("n", "<leader><leader>", function()
   vim.cmd("so")
-end)
+end, { desc = "Source current file" })
 
--- File Explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- File explorer (open netrw at current path)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open file explorer (netrw)" })
 
--- Moving selected lines in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- Force reload current buffer from disk
+vim.keymap.set('n', '<leader>rr', ':e!<CR>', { desc = "Force reload current file" })
 
--- Combining lines without losing cursor position
-vim.keymap.set("n", "J", "mzJ`z")
+-- Text Editing
+-- Move selected lines up/down in visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
--- Smooth scrolling
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- Join lines and keep cursor in place
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines (preserve cursor)" })
 
--- Search centering
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- Smooth scroll half-page and center cursor
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down (centered)" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
 
--- Replace pasting in visual mode
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- Search next/previous and center cursor
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
 
--- Clipboard operations, copy to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+-- Replace visual selection without overwriting default register
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over (no yank)" })
 
--- Delete without yanking
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+-- Copy to system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to clipboard" })
 
--- Escape using <C-c> in insert mode
-vim.keymap.set("i", "<C-c>", "<Esc>")
+-- Delete without affecting registers
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
 
--- Disable unused map
-vim.keymap.set("n", "Q", "<nop>")
+-- Insert mode escape
+vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Escape insert mode" })
 
--- Navigating quickfix and location lists
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+-- Disable accidental Q (recording mode)
+vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Q" })
 
--- Find and replace word
-vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>rwc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>rg", [[:%s//gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>rgc", [[:.,$s//gc<Left><Left><Left>]])
+-- Quickfix & Location List Navigation
+-- Navigate quickfix list
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Prev quickfix item" })
 
--- Find and delete
-vim.keymap.set("n", "<leader>fd", [[:g/\<C-r><C-w\>/d<CR>]])
-vim.keymap.set("n", "<leader>sd", [[:g//d<Left><Left>]])
+-- Navigate location list
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list item" })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location list item" })
 
--- Force reload current file
-vim.keymap.set('n', '<leader>rr', ':e!<CR>')
+-- Toggle quickfix window
+vim.keymap.set("n", "<leader>qq", function()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.bo[buf].filetype == "qf" then
+      vim.cmd("cclose")
+      return
+    end
+  end
+  vim.cmd("copen")
+end, { desc = "Toggle quickfix window" })
+
+-- Search & Replace
+-- Replace current word globally (no confirm)
+vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word (global)" })
+
+-- Replace current word from cursor to EOF (confirm)
+vim.keymap.set("n", "<leader>rwc", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left><Left>]], { desc = "Replace word (confirm from here)" })
+
+-- Replace arbitrary word globally (manual input)
+vim.keymap.set("n", "<leader>rg", [[:%s//gI<Left><Left><Left>]], { desc = "Replace (manual global)" })
+
+-- Replace arbitrary word with confirm from cursor to EOF
+vim.keymap.set("n", "<leader>rgc", [[:.,$s//gc<Left><Left><Left>]], { desc = "Replace (manual confirm)" })
+
+-- Replace current word across all quickfix files
+vim.keymap.set("n", "<leader>rq", [[:cfdo %s/\<<C-r><C-w>\>/<C-r><C-w>/gI | update<CR>]], { desc = "Replace word in quickfix (all)" })
+
+-- Replace with confirmation in quickfix files
+vim.keymap.set("n", "<leader>rqc", [[:cfdo %s/\<<C-r><C-w>\>/<C-r><C-w>/gc | update<CR>]], { desc = "Replace word in quickfix (confirm)" })
+
+-- Replace arbitrary pattern globally in quickfix
+vim.keymap.set("n", "<leader>rqg", [[:cfdo %s//gI | update<Left><Left><Left><Left><Left><Left><Left>]], { desc = "Replace in quickfix (manual global)" })
+
+-- Replace arbitrary pattern with confirm in quickfix
+vim.keymap.set("n", "<leader>rqgc", [[:cfdo %s//gc | update<Left><Left><Left><Left><Left>]], { desc = "Replace in quickfix (manual confirm)" })
+
+-- Find & Delete
+-- Delete all lines containing current word
+vim.keymap.set("n", "<leader>fd", [[:g/\<C-r><C-w\>/d<CR>]], { desc = "Delete lines containing word" })
+
+-- Delete all lines containing last search match
+vim.keymap.set("n", "<leader>sd", [[:g//d<Left><Left>]], { desc = "Delete lines matching search" })

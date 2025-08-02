@@ -420,14 +420,21 @@ return {
       })
 
       -- Global mappings
-      vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+      -- Show diagnostics in a floating window for the current line
+      vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic (float)" })
+
+      -- Jump to previous diagnostic and open float
       vim.keymap.set("n", "[d", function()
         vim.diagnostic.jump({ count = -1, float = true })
-      end)
+      end, { desc = "Go to previous diagnostic" })
+
+      -- Jump to next diagnostic and open float
       vim.keymap.set("n", "]d", function()
         vim.diagnostic.jump({ count = 1, float = true })
-      end)
-      vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+      end, { desc = "Go to next diagnostic" })
+
+      -- Populate the location list with diagnostics
+      vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
     end,
   },
 }

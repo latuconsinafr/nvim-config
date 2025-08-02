@@ -21,10 +21,19 @@ return {
     })
 
     -- Basic keymaps
+    -- Paste after cursor using Yanky (preserves default register history)
     vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+
+    -- Paste before cursor using Yanky
     vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-    vim.keymap.set("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
-    vim.keymap.set("n", "<c-n>", "<Plug>(YankyNextEntry)")
+
+    -- Cycle to previous yank in the yank history
+    vim.keymap.set("n", "<C-p>", "<Plug>(YankyPreviousEntry)")
+
+    -- Cycle to next yank in the yank history
+    vim.keymap.set("n", "<C-n>", "<Plug>(YankyNextEntry)")
+
+    -- Open a searchable popup list of past yanks (like a clipboard manager)
     vim.keymap.set("n", "<leader>p", ":YankyRingHistory<CR>", { desc = "Open Yanky ring history" })
   end,
 }
