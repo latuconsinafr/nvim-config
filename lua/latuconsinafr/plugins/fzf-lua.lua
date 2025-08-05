@@ -14,6 +14,7 @@ return {
     { "<leader>fch", "<cmd>FzfLua command_history<CR>", desc = "Commands history" },       -- View command history
     { "<leader>fr",  "<cmd>FzfLua oldfiles<CR>",        desc = "Recent Files" },           -- Recently opened files
     { "<leader>ft",  "<cmd>FzfLua grep_cword<CR>",      desc = "Grep word under cursor" }, -- Grep for word under cursor
+    { "<leader>f'",  "<cmd>FzfLua registers<CR>",       desc = "Registers" },              -- List registers
   },
 
   config = function()

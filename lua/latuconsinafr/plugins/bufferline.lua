@@ -112,7 +112,7 @@ return {
           show_duplicate_prefix = true,     -- Show file path prefix when there are duplicate filenames
           persist_buffer_sort = true,       -- whether or not custom sorted buffers should persist
 
-          separator_style = "padded_slant", -- Can be "slant", "thick", "thin", or custom list
+          separator_style = "slant", -- Can be "slant", "thick", "thin", or custom list
 
           -- Style presets: disable italics and bold text
           style_preset = {

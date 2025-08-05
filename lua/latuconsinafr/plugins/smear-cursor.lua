@@ -32,22 +32,22 @@ return {
     -- cursor_color = "#ffffff",
 
     -- Faster smear
-    -- stiffness = 0.8,                      -- 0.6      [0, 1]
-    -- trailing_stiffness = 0.5,             -- 0.4      [0, 1]
-    -- stiffness_insert_mode = 0.7,          -- 0.5      [0, 1]
-    -- trailing_stiffness_insert_mode = 0.7, -- 0.5      [0, 1]
-    -- damping = 0.8,                        -- 0.65     [0, 1]
-    -- damping_insert_mode = 0.8,            -- 0.7      [0, 1]
-    -- distance_stop_animating = 0.5,        -- 0.1      > 0
+    stiffness = 0.8,                      -- 0.6      [0, 1]
+    trailing_stiffness = 0.5,             -- 0.4      [0, 1]
+    stiffness_insert_mode = 0.7,          -- 0.5      [0, 1]
+    trailing_stiffness_insert_mode = 0.7, -- 0.5      [0, 1]
+    damping = 0.8,                        -- 0.65     [0, 1]
+    damping_insert_mode = 0.8,            -- 0.7      [0, 1]
+    distance_stop_animating = 0.5,        -- 0.1      > 0
 
     -- Smooth cursor without smear
-    stiffness = 0.5,
-    trailing_stiffness = 0.5,
-    damping = 0.67,
-    matrix_pixel_threshold = 0.5,
+    -- stiffness = 0.5,
+    -- trailing_stiffness = 0.5,
+    -- damping = 0.67,
+    -- matrix_pixel_threshold = 0.5,
 
     -- Time interval between draws
-    time_interval = 10, -- milliseconds
+    time_interval = 12, -- milliseconds
 
     -- Set to `true` to prevent the smear from overlapping the target character, hiding it until the animation is over.
     never_draw_over_target = true,

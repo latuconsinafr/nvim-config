@@ -21,10 +21,6 @@ vim.keymap.set('n', '<leader>rr', ':e!<CR>', { desc = "Force reload current file
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
--- Join lines and keep cursor in place
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines (preserve cursor)" })
-
--- Smooth scroll half-page and center cursor
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down (centered)" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
 
@@ -35,12 +31,20 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" }
 -- Replace visual selection without overwriting default register
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over (no yank)" })
 
--- Copy to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
-vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to clipboard" })
-
 -- Delete without affecting registers
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
+vim.keymap.set("n", "d", [["_d]], { desc = "Delete (no yank)" })
+vim.keymap.set("n", "dd", [["_dd]], { desc = "Delete line (no yank)" })
+vim.keymap.set("x", "d", [["_d]], { desc = "Delete selection (no yank)" })
+
+-- Change without affecting registers
+vim.keymap.set("n", "c", [["_c]], { desc = "Change (no yank)" })
+vim.keymap.set("n", "cc", [["_cc]], { desc = "Change line (no yank)" })
+vim.keymap.set("x", "c", [["_c]], { desc = "Change selection (no yank)" })
+
+-- Substitute without affecting registers
+vim.keymap.set("n", "s", [["_s]], { desc = "Substitute character (no yank)" })
+vim.keymap.set("n", "S", [["_S]], { desc = "Substitute line (no yank)" })
+vim.keymap.set("x", "s", [["_s]], { desc = "Substitute selection (no yank)" })
 
 -- Insert mode escape
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Escape insert mode" })
@@ -107,6 +111,7 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+
 -- Search & Replace
 -- Replace current word globally (no confirm)
 vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],

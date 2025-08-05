@@ -11,29 +11,59 @@ return {
           return vim.o.columns * 0.4
         end
       end,
-      open_mapping = [[<c-\>]], -- Ctrl+\ to toggle terminal
       hide_numbers = true,
       shade_filetypes = {},
       autochdir = true,       -- Automatically change to the directory of the active buffer
       shade_terminals = true, -- Apply a shading effect to the terminal
       shading_factor = 2,     -- Degree of shading (1-3)
       start_in_insert = true, -- Start terminal in insert mode
-      insert_mappings = true, -- Allow terminal to be closed in insert mode with the configured toggle key
+      insert_mappings = false, -- Disabled to use custom toggle system
       persist_size = true,    -- Retain terminal size across sessions
-      persist_mode = true,
+      persist_mode = true,    -- if set to true (default) the previous terminal mode will be remembered
       direction = 'float',    -- Choose between 'horizontal', 'vertical', 'tab', or 'float'
-      close_on_exit = true,   -- Close the terminal when the process exits
+      float_opts = {
+        width = math.floor(vim.o.columns * 0.85),
+        height = math.floor(vim.o.lines * 0.75),
+        title_pos = 'center',
+      },
+      close_on_exit = true, -- Close the terminal when the process exits
       shell = vim.o.shell,
       auto_scroll = true,
     })
 
+    local Terminal = require('toggleterm.terminal').Terminal
+
+    -- Terminal instances with generic names
+    local terminals = {
+      Terminal:new({ count = 1, display_name = "Alpha" }),
+      Terminal:new({ count = 2, display_name = "Beta" }),
+      Terminal:new({ count = 3, display_name = "Gamma" }),
+      Terminal:new({ count = 4, display_name = "Delta" }),
+      Terminal:new({ count = 5, display_name = "Epsilon" }),
+    }
+
+    -- Function to toggle specific terminal
+    function _G.toggle_terminal(num)
+      if terminals[num] then
+        terminals[num]:toggle()
+      end
+    end
+
+    -- Keymaps for terminal management
+    -- Main toggle (replaces Ctrl+\)
+    vim.keymap.set({'n', 't'}, '<C-\\>', '<cmd>lua toggle_terminal(1)<CR>', { desc = "Toggle Alpha" })
+
+    -- Individual terminal toggles
+    vim.keymap.set({'n', 't'}, '\\1', '<cmd>lua toggle_terminal(1)<CR>', { desc = "Toggle Alpha" })
+    vim.keymap.set({'n', 't'}, '\\2', '<cmd>lua toggle_terminal(2)<CR>', { desc = "Toggle Beta" })
+    vim.keymap.set({'n', 't'}, '\\3', '<cmd>lua toggle_terminal(3)<CR>', { desc = "Toggle Gamma" })
+    vim.keymap.set({'n', 't'}, '\\4', '<cmd>lua toggle_terminal(4)<CR>', { desc = "Toggle Delta" })
+    vim.keymap.set({'n', 't'}, '\\5', '<cmd>lua toggle_terminal(5)<CR>', { desc = "Toggle Epsilon" })
+
     -- Terminal mode mappings
     function _G.set_terminal_keymaps()
-      -- Exit terminal mode using <Esc>
-      vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { desc = "Exit terminal mode (ESC)", buffer = 0 })
-
-      -- Exit terminal mode using 'jk'
-      vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { desc = "Exit terminal mode (jk)", buffer = 0 })
+      -- Switch to normal mode
+      vim.keymap.set('t', '<C-q>', [[<C-\><C-n>]], { desc = "Switch to normal mode", buffer = 0 })
 
       -- Navigate to the left window from terminal
       vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { desc = "Terminal window left", buffer = 0 })
@@ -46,9 +76,6 @@ return {
 
       -- Navigate to the right window from terminal
       vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { desc = "Terminal window right", buffer = 0 })
-
-      -- Trigger normal mode and use window command
-      vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], { desc = "Use <C-w> window commands from terminal", buffer = 0 })
     end
 
     -- Apply terminal keymaps
