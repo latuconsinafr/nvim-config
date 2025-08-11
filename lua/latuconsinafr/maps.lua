@@ -62,7 +62,7 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location lis
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location list item" })
 
 -- Toggle quickfix window
-vim.keymap.set("n", "<leader>qq", function()
+vim.keymap.set("n", "<leader>qf", function()
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
     if vim.bo[buf].filetype == "qf" then
