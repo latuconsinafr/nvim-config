@@ -21,6 +21,6 @@ return {
 
     -- Define the highlight group for indent guides AFTER setup,
     -- to avoid errors about missing highlight groups
-    vim.api.nvim_set_hl(0, "IndentBlanklineChar", { fg = "#AAAAAA" }) -- Set indent guide color to light gray
+    vim.api.nvim_set_hl(0, "IndentBlanklineChar", { fg = "#6e6a86" }) -- a muted, slightly purplish gray from the Rose Pine palette.
   end,
 }

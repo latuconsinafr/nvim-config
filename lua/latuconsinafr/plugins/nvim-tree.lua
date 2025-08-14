@@ -20,6 +20,16 @@ return {
       renderer = {
         group_empty = true, -- Group empty directories together
 
+        indent_markers = { -- Indent marker
+          enable = true,
+          icons = {
+            corner = "└",
+            edge = "│",
+            item = "│",
+            none = " ",
+          },
+        },
+
         icons = {
           show = {
             file = true,         -- Show file icons
@@ -83,5 +93,8 @@ return {
     vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Find File in Nvim Tree" })
     vim.keymap.set("n", "<leader>t]", grow_tree, { desc = "Grow Nvim‑Tree by 10 cols" })
     vim.keymap.set("n", "<leader>t[", shrink_tree, { desc = "Shrink Nvim‑Tree by 10 cols (min 30)" })
+
+    -- Define the highlight group for indent marker AFTER setup,
+    vim.api.nvim_set_hl(0, "NvimTreeIndentMarker", { fg = "#6e6a86" }) -- a muted, slightly purplish gray from the Rose Pine palette.
   end,
 }
