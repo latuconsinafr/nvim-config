@@ -34,15 +34,38 @@ return {
           },
         },
         lualine_b = {
-          { 'branch',     cond = hide_below(100) },
+          {
+            'branch',
+            cond = hide_below(100),
+            fmt = function(str)
+              if #str > 27 then
+                -- Shorten common prefixes
+                str = str:gsub("feature/", "feat/")
+                str = str:gsub("bugfix/", "fix/")
+                str = str:gsub("hotfix/", "hot/")
+
+                -- Truncate if still too long
+                if #str > 27 then
+                  return str:sub(1, 24) .. "..."
+                end
+              end
+              return str
+            end
+          },
           { 'diff',       cond = hide_below(170) },
           { 'diagnostics' }
         },
         lualine_c = {
           {
             'filename',
-            path = 1,
-            cond = hide_below(130),
+            path = 4, -- Smart path: shows filename, or relative path if needed
+            shorting_target = 40, -- Truncate path if longer than 40 chars
+            symbols = {
+              modified = ' ●', -- Text to show when file is modified
+              readonly = ' ', -- Text to show when file is non-modifiable
+              unnamed = '[No Name]', -- Text to show for unnamed buffers
+            },
+            cond = hide_below(80),
           },
         },
         lualine_x = {
