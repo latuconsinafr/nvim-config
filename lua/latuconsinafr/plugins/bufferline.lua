@@ -104,15 +104,15 @@ return {
             },
           },
 
-          color_icons = true,               -- Use color icons (requires web-devicons)
+          color_icons = true,             -- Use color icons (requires web-devicons)
           show_buffer_icons = true,
-          show_buffer_close_icons = true,   -- Hide individual buffer close icons
-          show_close_icon = false,          -- Hide global close icon
-          show_tab_indicators = true,       -- Show small indicator for active buffer
-          show_duplicate_prefix = true,     -- Show file path prefix when there are duplicate filenames
-          persist_buffer_sort = true,       -- whether or not custom sorted buffers should persist
+          show_buffer_close_icons = true, -- Hide individual buffer close icons
+          show_close_icon = false,        -- Hide global close icon
+          show_tab_indicators = true,     -- Show small indicator for active buffer
+          show_duplicate_prefix = true,   -- Show file path prefix when there are duplicate filenames
+          persist_buffer_sort = true,     -- whether or not custom sorted buffers should persist
 
-          separator_style = "slant", -- Can be "slant", "thick", "thin", or custom list
+          separator_style = "slant",      -- Can be "slant", "thick", "thin", or custom list
 
           -- Style presets: disable italics and bold text
           style_preset = {
@@ -131,29 +131,97 @@ return {
       })
 
       -- Keymaps for navigation and buffer actions
-      vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
-      vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
-      vim.keymap.set("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Pick buffer" })
-      vim.keymap.set("n", "<leader>bP", "<cmd>BufferLineTogglePin<CR>", { desc = "Toggle buffer pin" })
-
-      -- Go to buffer 1–9
-      for i = 1, 9 do
-        vim.keymap.set("n", "<leader>b" .. i, function()
-          require("bufferline").go_to(i, true)
-        end, { desc = "Go to bufferline tab " .. i })
-      end
+      vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
+      vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
+      vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePick<CR>", { desc = "Choose (Pick) buffer" })
+      vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineTogglePin<CR>", { desc = "Toggle buffer pin" })
 
       -- Smart close current buffer
       vim.keymap.set("n", "<leader>bdc", function()
         smart_buf_delete(vim.api.nvim_get_current_buf())
-      end, { desc = "Smart buffer delete" })
+      end, { desc = "Smart current buffer delete" })
 
       -- Close all other buffer except current
       vim.keymap.set("n", "<leader>bdo", "<cmd>BufferLineCloseOthers<CR>",
         { desc = "Close all other buffers" })
+
+      -- Close all non-pinned buffers and focus smartly
+      vim.keymap.set("n", "<leader>bdp", function()
+        -- Close all unpinned buffers
+        vim.cmd("BufferLineGroupClose ungrouped")
+
+        local current = vim.api.nvim_get_current_buf()
+        local alt = vim.fn.bufnr("#")
+
+        -- safe require of bufferline.state
+        local ok, state = pcall(require, "bufferline.state")
+        if not ok or type(state) ~= "table" or type(state.buffers) ~= "table" then
+          state = nil
+        end
+
+        -- helper: check if buffer is valid & pinned
+        local function is_pinned(bufnr)
+          if type(bufnr) ~= "number" or bufnr < 1 or not vim.api.nvim_buf_is_valid(bufnr) then
+            return false
+          end
+
+          -- 1) Prefer bufferline.state if available
+          if state then
+            for _, b in ipairs(state.buffers) do
+              if b and b.id == bufnr and b.pinned then
+                return true
+              end
+            end
+          end
+
+          -- 2) Fallback: check common buffer-local markers some setups set
+          local b_v = vim.b[bufnr]
+          if type(b_v) == "table" then
+            if b_v.pinned == true or b_v.bufferline_pinned == true or b_v.bufferline_pin == true then
+              return true
+            end
+          end
+
+          return false
+        end
+
+        -- 1) Try alternate buffer if it exists and is pinned
+        if is_pinned(alt) and vim.api.nvim_buf_is_valid(alt) then
+          vim.api.nvim_set_current_buf(alt)
+          return
+        end
+
+        -- 2) Else fallback to the first pinned buffer known to bufferline.state
+        if state then
+          for _, b in ipairs(state.buffers) do
+            if b and b.pinned and vim.api.nvim_buf_is_valid(b.id) then
+              vim.api.nvim_set_current_buf(b.id)
+              return
+            end
+          end
+        end
+
+        -- 3) If no pinned buffers found, pick a sensible listed buffer (avoid NvimTree)
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+          if vim.api.nvim_buf_is_valid(buf)
+              and vim.bo[buf].buflisted
+              and vim.api.nvim_buf_get_name(buf) ~= ""
+              and vim.bo[buf].filetype ~= "NvimTree" then
+            vim.api.nvim_set_current_buf(buf)
+            return
+          end
+        end
+
+        -- 4) If everything was wiped and current is invalid, create a scratch buffer
+        if not vim.api.nvim_buf_is_valid(current) then
+          vim.cmd("enew")
+        end
+      end, { desc = "Close non-pinned buffers" })
+
       -- Close all visible buffers to the right of the current buffer
       vim.keymap.set("n", "<leader>bdl", "<cmd>BufferLineCloseRight<CR>",
         { desc = "Close all visible buffers to the right of the current buffer" })
+
       -- Close all visible buffers to the left of the current buffer
       vim.keymap.set("n", "<leader>bdh", "<cmd>BufferLineCloseLeft<CR>",
         { desc = "Close all visible buffers to the left of the current buffer" })

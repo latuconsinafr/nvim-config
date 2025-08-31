@@ -8,7 +8,7 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 
--- Indentation 
+-- Indentation
 vim.opt.smartindent = true
 
 -- Enable clipboard access

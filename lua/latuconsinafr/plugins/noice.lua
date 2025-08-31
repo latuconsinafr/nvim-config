@@ -16,7 +16,7 @@ return {
     require("noice").setup({
       cmdline = {
         enabled = true,
-        view = "cmdline"
+        view = "cmdline",
       },
       messages = {
         enabled = true,
@@ -91,43 +91,20 @@ return {
           ["{%S-}"] = "@parameter",
         },
       },
-      views = {
-        cmdline_popup = {
-          position = {
-            row = -2,
-            col = 2
+      -- Route code actions to cmd line for better UI
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            kind = "confirm",
+            find = "Code actions",
           },
-          size = {
-            width = "98%",
-            height = "auto",
-          },
-          border = {
-            style = "rounded",
-          },
-          win_options = {
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-          },
+          view = "cmdline",
         },
-        confirm = {
-          backend = "popup",
-          relative = "editor",
-          position = {
-            col = 2,
-            row = -2,
-          },
-          size = {
-            height = "auto",
-            width = "98%",
-          },
-          win_options = {
-            wrap = true,
-          },
-        }
       },
-      -- you can enable a preset for easier configuration
       presets = {
         bottom_search = false,        -- use a classic bottom cmdline for search
-        command_palette = true,       -- position the cmdline and popupmenu together
+        command_palette = false,      -- disable this to get back the cmdline area
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = true,            -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true,        -- add a border to hover docs and signature help

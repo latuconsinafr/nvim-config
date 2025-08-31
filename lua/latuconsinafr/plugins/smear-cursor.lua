@@ -3,7 +3,7 @@ return {
   name = "smear-cursor",       -- Name for easy reference inside lazy.nvim
 
   -- Enabled/Disabled
-  enabled = true,
+  enabled = false,
 
   opts = {
     -- Smear cursor when switching buffers or windows.
