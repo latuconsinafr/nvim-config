@@ -196,8 +196,8 @@ return {
         vim.keymap.set("n", "<leader>lT", fzf.lsp_typedefs, { desc = "Type Definitions", buffer = bufnr })
         vim.keymap.set("n", "<leader>lI", fzf.lsp_incoming_calls, { desc = "Incoming Calls", buffer = bufnr })
         vim.keymap.set("n", "<leader>lO", fzf.lsp_outgoing_calls, { desc = "Outgoing Calls", buffer = bufnr })
-        vim.keymap.set("n", "<leader>ldd", fzf.diagnostics_document, { desc = "Diagnostics", buffer = bufnr })
-        vim.keymap.set("n", "<leader>ldw", fzf.diagnostics_workspace, { desc = "Diagnostics", buffer = bufnr })
+        vim.keymap.set("n", "<leader>ldd", fzf.diagnostics_document, { desc = "Document Diagnostics", buffer = bufnr })
+        vim.keymap.set("n", "<leader>ldw", fzf.diagnostics_workspace, { desc = "Workspace Diagnostics", buffer = bufnr })
         vim.keymap.set("n", "<leader>lc", fzf.lsp_code_actions, { desc = "Code Actions", buffer = bufnr })
       end
 
