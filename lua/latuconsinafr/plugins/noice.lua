@@ -91,15 +91,43 @@ return {
           ["{%S-}"] = "@parameter",
         },
       },
-      -- Route code actions to cmd line for better UI
+      -- Custom views
+      views = {
+        code_action_popup = {
+          backend = "popup",
+          relative = "editor",
+          position = {
+            row = -2,
+            col = 2,
+          },
+          size = {
+            width = "98%",
+            height = "auto",
+          },
+          border = {
+            style = "rounded",
+            padding = { 0, 1 },
+            text = {
+              top = " Confirm ",
+              top_align = "center",
+            },
+          },
+          win_options = {
+            winhighlight = "Normal:NormalFloat,FloatBorder:NoiceCmdlinePopupBorder,FloatTitle:NoiceCmdlinePopupBorder",
+          },
+          zindex = 60,
+        },
+      },
+      -- Route specified actions to specified views
       routes = {
+        -- Code action
         {
           filter = {
             event = "msg_show",
             kind = "confirm",
             find = "Code actions",
           },
-          view = "cmdline",
+          view = "code_action_popup",
         },
       },
       presets = {
@@ -110,5 +138,18 @@ return {
         lsp_doc_border = true,        -- add a border to hover docs and signature help
       },
     })
+
+    -- Add noice lsp keymaps
+    vim.keymap.set({ "n", "i", "s" }, "<C-f>", function()
+      if not require("noice.lsp").scroll(4) then
+        return "<C-f>"
+      end
+    end, { silent = true, expr = true, desc = "Noice scroll forward" })
+
+    vim.keymap.set({ "n", "i", "s" }, "<C-b>", function()
+      if not require("noice.lsp").scroll(-4) then
+        return "<C-b>"
+      end
+    end, { silent = true, expr = true, desc = "Noice scroll backward" })
   end
 }

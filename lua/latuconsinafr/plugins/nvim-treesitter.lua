@@ -25,11 +25,10 @@ return {
 
       -- Setup treesitter-context (shows scope like function/class at top of window)
       require("treesitter-context").setup {
-        enable = true,        -- Enable the context module
-        throttle = true,      -- Improve performance by throttling updates
-        max_lines = 5,        -- Max lines of context to show (0 = infinite)
-        trim_scope = "outer", -- Trim outermost context if too many
-        mode = "cursor",      -- Show context based on cursor position
+        enable = true,
+        max_lines = 5,
+        trim_scope = "outer",
+        mode = "cursor",
       }
 
       -- Matchup settings
@@ -72,6 +71,6 @@ return {
           enable = true,
         },
       }
-    end,
+    end
   },
 }
