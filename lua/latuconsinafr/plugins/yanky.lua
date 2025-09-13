@@ -51,7 +51,7 @@ return {
       -- Try to get history items
       local history_items = yanky_history.all() or {}
 
-      for i, item in ipairs(history_items) do
+      for _, item in ipairs(history_items) do
         local content = item.regcontents or item.content or ""
 
         if type(content) == "table" then
@@ -60,8 +60,9 @@ return {
 
         if content ~= "" then
           local preview = content:gsub("\n", " "):sub(1, 80)
-          table.insert(entries, string.format("%d: %s", i, preview))
           table.insert(contents, content)
+          -- Use #contents (always aligned with entries)
+          table.insert(entries, string.format("%d: %s", #contents, preview))
         end
       end
 

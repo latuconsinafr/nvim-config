@@ -9,7 +9,7 @@ return {
       -- delay: delay in milliseconds
       delay = 200,
       -- under_cursor: whether or not to illuminate under the cursor
-      under_cursor = false,
+      under_cursor = true,
     })
 
     vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "Visual" })  -- Normal text matches
