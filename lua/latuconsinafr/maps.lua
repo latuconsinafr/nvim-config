@@ -153,3 +153,13 @@ vim.keymap.set("n", "<leader>dw", [[:g/\<<C-r><C-w>\>/d<CR>]], { desc = "Delete 
 
 -- Delete all lines matching last search
 vim.keymap.set("n", "<leader>df", [[:g//d<Left><Left>]], { desc = "Delete lines matching search" })
+
+-- Clear search highlight
+vim.keymap.set("n", "<Esc>", function()
+  if vim.v.hlsearch == 1 then
+    vim.cmd("nohlsearch")
+  else
+    -- Behave like normal Esc
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+  end
+end, { silent = true, desc = "Escape & clear search highlight if active" })
