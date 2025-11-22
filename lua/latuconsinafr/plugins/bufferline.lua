@@ -20,6 +20,7 @@ return {
         group = vim.api.nvim_create_augroup("LazyLoadBufferline", { clear = true }),
         callback = function(args)
           local ft = vim.bo[args.buf].filetype
+
           if ft ~= "NvimTree" and ft ~= "" then
             -- Load the plugin and remove this autocommand group
             vim.api.nvim_del_augroup_by_name("LazyLoadBufferline")
@@ -62,10 +63,14 @@ return {
         options = {
           custom_filter = function(bufnr)
             local filetype = vim.bo[bufnr].filetype
-            local bufname = vim.api.nvim_buf_get_name(bufnr)
+            local buftype = vim.bo[bufnr].buftype
 
-            -- Hide quickfix, and any unwanted non-file buffers
-            return filetype ~= "qf" and bufname ~= ""
+            -- Hide quickfix, terminal, help, qf, nvim tree and non-file buffers
+            local excluded_buftypes = { "quickfix", "terminal", "help", "nofile" }
+            local excluded_filetypes = { "qf", "NvimTree" }
+
+            return not vim.tbl_contains(excluded_buftypes, buftype)
+                and not vim.tbl_contains(excluded_filetypes, filetype)
           end,
 
           mode = "buffers",                    -- Use buffers instead of tabs

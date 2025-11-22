@@ -58,8 +58,28 @@ return {
         lualine_c = {
           {
             'filename',
-            path = 4, -- Smart path: shows filename, or relative path if needed
-            shorting_target = 40, -- Truncate path if longer than 40 chars
+            path = 1,
+            fmt = function(str)
+              local max_len = math.floor(vim.o.columns * 0.3) -- 30% of screen width
+
+              if #str > max_len then
+                -- Shorten: keep filename + parent directory
+                local parts = vim.split(str, '/', { plain = true })
+
+                if #parts > 2 then
+                  -- Show: .../parent/file.lua
+                  return '.../' .. parts[#parts - 1] .. '/' .. parts[#parts]
+                elseif #parts == 2 then
+                  -- Show: parent/file.lua
+                  return parts[#parts - 1] .. '/' .. parts[#parts]
+                else
+                  -- Just filename
+                  return parts[#parts]
+                end
+              end
+
+              return str
+            end,
             symbols = {
               modified = ' ●', -- Text to show when file is modified
               readonly = ' ', -- Text to show when file is non-modifiable

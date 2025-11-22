@@ -163,7 +163,7 @@ return {
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition", buffer = bufnr })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation", buffer = bufnr })
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation", buffer = bufnr })
-        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
+        vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
 
         vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder,
           { desc = "Add workspace folder", buffer = bufnr })

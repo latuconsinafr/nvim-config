@@ -163,3 +163,26 @@ vim.keymap.set("n", "<Esc>", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
   end
 end, { silent = true, desc = "Escape & clear search highlight if active" })
+
+-- Open new buffer with specified filetype (if any)
+vim.keymap.set("n", "<leader>bn", function()
+  vim.ui.input({ prompt = "Filetype (optional): " }, function(ft)
+    vim.cmd("enew")
+    if ft and ft ~= "" then
+      vim.bo.filetype = ft
+    end
+  end)
+end, { desc = "New buffer with filetype" })
+
+-- Set filetype for current buffer
+vim.keymap.set("n", "<leader>bf", function()
+  vim.ui.input({
+    prompt = "Set filetype: ",
+    default = vim.bo.filetype
+  }, function(ft)
+    if ft and ft ~= "" then
+      vim.bo.filetype = ft
+      print("Filetype set to: " .. ft)
+    end
+  end)
+end, { desc = "Set buffer filetype" })

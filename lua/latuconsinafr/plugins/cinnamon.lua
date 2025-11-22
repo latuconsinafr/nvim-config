@@ -4,7 +4,7 @@ return {
   version = "*", -- Use the latest release version
 
   -- Enabled/Disabled
-  enabled = false,
+  enabled = true,
 
   -- Configuration function that runs after the plugin is loaded
   config = function()

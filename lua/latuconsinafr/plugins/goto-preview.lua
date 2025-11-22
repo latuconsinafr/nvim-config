@@ -13,54 +13,76 @@ return {
       -- gpD → Close all previews
 
       -- Add post_open_hook to enable float-to-split conversion
-      post_open_hook = function(buffer, _)
+      post_open_hook = function(buffer, win)
+        -- Validate that buffer and window are valid
+        if not buffer or not vim.api.nvim_buf_is_valid(buffer) then
+          return
+        end
+        if not win or not vim.api.nvim_win_is_valid(win) then
+          return
+        end
+
         local opts = { noremap = true, silent = true, buffer = buffer }
 
-        -- Convert to vertical split (float content to the RIGHT)
+        -- Convert to vertical split
         vim.keymap.set('n', 'gpv', function()
-          local float_buf = vim.api.nvim_get_current_buf()
-          local cursor_pos = vim.api.nvim_win_get_cursor(0)
+          -- Use the buffer parameter, not get_current_buf
+          local float_buf = buffer
           local buf_name = vim.api.nvim_buf_get_name(float_buf)
 
-          -- Close the float first
+          -- Get cursor position while we're still in the float window
+          local ok, cursor_pos = pcall(vim.api.nvim_win_get_cursor, win)
+
+          if not ok then
+            cursor_pos = { 1, 0 } -- Fallback to first line
+          end
+
+          -- Close the float
           require('goto-preview').close_all_win()
 
-          -- Now we're back in original buffer, create split to the right
+          -- Create vertical split
           vim.cmd('vsplit')
-          vim.cmd('wincmd l') -- Move to the right split
+          vim.cmd('wincmd l')
 
-          -- Open the file properly instead of just setting buffer
+          -- Open the file
           if buf_name and buf_name ~= "" then
             vim.cmd('edit ' .. vim.fn.fnameescape(buf_name))
-            vim.api.nvim_win_set_cursor(0, cursor_pos)
+            -- Safe cursor positioning
+            pcall(vim.api.nvim_win_set_cursor, 0, cursor_pos)
           else
-            -- Fallback if no filename - using new API
+            -- Fallback for unnamed buffers
             vim.bo[float_buf].buflisted = true
             vim.api.nvim_win_set_buf(0, float_buf)
-            vim.api.nvim_win_set_cursor(0, cursor_pos)
+            pcall(vim.api.nvim_win_set_cursor, 0, cursor_pos)
           end
         end, opts)
 
-        -- Same for horizontal split
+        -- Convert to horizontal split
         vim.keymap.set('n', 'gps', function()
-          local float_buf = vim.api.nvim_get_current_buf()
-          local cursor_pos = vim.api.nvim_win_get_cursor(0)
+          local float_buf = buffer
           local buf_name = vim.api.nvim_buf_get_name(float_buf)
 
+          local ok, cursor_pos = pcall(vim.api.nvim_win_get_cursor, win)
+          if not ok then
+            cursor_pos = { 1, 0 }
+          end
+
           require('goto-preview').close_all_win()
+
           vim.cmd('split')
           vim.cmd('wincmd j')
 
           if buf_name and buf_name ~= "" then
             vim.cmd('edit ' .. vim.fn.fnameescape(buf_name))
-            vim.api.nvim_win_set_cursor(0, cursor_pos)
+            pcall(vim.api.nvim_win_set_cursor, 0, cursor_pos)
           else
             vim.bo[float_buf].buflisted = true
             vim.api.nvim_win_set_buf(0, float_buf)
-            vim.api.nvim_win_set_cursor(0, cursor_pos)
+            pcall(vim.api.nvim_win_set_cursor, 0, cursor_pos)
           end
         end, opts)
 
+        -- Close preview
         vim.keymap.set('n', 'q', function()
           require('goto-preview').close_all_win()
         end, opts)

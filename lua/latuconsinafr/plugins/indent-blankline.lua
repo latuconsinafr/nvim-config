@@ -11,11 +11,16 @@ return {
         highlight = "IndentBlanklineChar", -- Highlight group for indent guides
       },
       scope = {
-        enabled = true,                    -- Enable scope highlighting (highlight current code block)
-        show_start = true,                 -- Show the start of the current scope
-        show_end = true,                   -- Show the end of the current scope
+        -- include = {
+        --   -- But the help menu states that wildcard can lead to some weird behaviour
+        --   node_type = { ["*"] = { "*" } },
+        -- },
+        char = "▍", -- Bolder than the indent
+        enabled = true, -- Enable scope highlighting (highlight current code block)
+        show_start = true, -- Show the start of the current scope
+        show_end = true, -- Show the end of the current scope
         highlight = "IndentBlanklineChar", -- Use same highlight group for scope guides
-        show_exact_scope = true            -- Enable the exact scope number
+        show_exact_scope = true -- Enable the exact scope number
       },
     })
 

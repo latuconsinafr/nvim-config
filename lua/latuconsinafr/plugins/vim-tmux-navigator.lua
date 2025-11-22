@@ -1,5 +1,5 @@
 return {
-  "christoomey/vim-tmux-navigator",
+  "christoomey/vim-tmux-navigator", -- Plugin to navigate vim insie tmux
   lazy = false,
   cmd = {
     "TmuxNavigateLeft",
@@ -10,6 +10,7 @@ return {
     "TmuxNavigatorProcessList",
   },
   keys = {
+    -- Bind nvim command to tmux command
     { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Navigate Left" },
     { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Navigate Down" },
     { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Navigate Up" },
