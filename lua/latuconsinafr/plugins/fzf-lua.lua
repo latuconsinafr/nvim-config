@@ -15,6 +15,7 @@ return {
     { "<leader>fr",  "<cmd>FzfLua oldfiles<CR>",        desc = "Recent Files" },           -- Recently opened files
     { "<leader>ft",  "<cmd>FzfLua grep_cword<CR>",      desc = "Grep word under cursor" }, -- Grep for word under cursor
     { "<leader>f'",  "<cmd>FzfLua registers<CR>",       desc = "Registers" },              -- List registers
+    { "<leader>fm",  "<cmd>FzfLua marks<CR>",           desc = "Marks" },                  -- List marks
   },
 
   config = function()
