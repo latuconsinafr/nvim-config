@@ -91,6 +91,7 @@ return {
               luasnip = "[Snippet]",
               buffer = "[Buffer]",
               path = "[Path]",
+              ["vim-dadbod-completion"] = "[DB]",
             })[entry.source.name]
             return vim_item
           end,
@@ -117,6 +118,19 @@ return {
           { { name = "path" } },
           { { name = "cmdline" } }
         ),
+      })
+
+      -- Sql for dadbod
+      cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+        sources = cmp.config.sources({
+          { name = "vim-dadbod-completion" },
+          { name = "nvim_lsp" },
+        }, {
+          { name = "buffer" },
+        }),
+        snippet = {
+          expand = function() end, -- disable snippets for SQL
+        },
       })
     end,
   },

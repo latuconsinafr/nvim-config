@@ -20,7 +20,7 @@ return {
       renderer = {
         group_empty = true, -- Group empty directories together
 
-        indent_markers = { -- Indent marker
+        indent_markers = {  -- Indent marker
           enable = true,
           icons = {
             corner = "└",
@@ -61,11 +61,25 @@ return {
 
     local api            = require("nvim-tree.api")
     local view_module    = require("nvim-tree.view")
-    local original_width = 30
+    local original_width = 40
     local step           = 10
 
-    -- Helper to ensure tree is open
-    local function ensure_open()
+    -- Sidebar helper
+    local function is_sidebar_open(ft)
+      for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        if vim.bo[buf].filetype == ft then
+          return true
+        end
+      end
+      return false
+    end
+
+    -- Ensure only NvimTree is open
+    local function ensure_exclusive_nvimtree()
+      if is_sidebar_open("dbui") then
+        vim.cmd("DBUIClose")
+      end
       if not view_module.is_visible() then
         api.tree.open()
       end
@@ -73,7 +87,7 @@ return {
 
     -- Increase by `step`, up to vim.o.columns
     local function grow_tree()
-      ensure_open()
+      ensure_exclusive_nvimtree()
       local cur = view_module.View.width or original_width
       local nw  = math.min(vim.o.columns, cur + step)
       view_module.resize(nw)
@@ -81,16 +95,33 @@ return {
 
     -- Decrease by `step`, but never below `original_width`
     local function shrink_tree()
-      ensure_open()
+      ensure_exclusive_nvimtree()
       local cur = view_module.View.width or original_width
       local nw  = math.max(original_width, cur - step)
       view_module.resize(nw)
     end
 
     -- Set keymaps explicitly (eagerly)
-    vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
-    vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh Nvim Tree" })
-    vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Find File in Nvim Tree" })
+    vim.keymap.set("n", "<leader>tt", function()
+      -- Close DBUI first
+      if is_sidebar_open("dbui") then
+        vim.cmd("DBUIClose")
+      end
+
+      -- Toggle NvimTree
+      vim.cmd("NvimTreeToggle")
+    end, { desc = "Toggle NvimTree (exclusive)" })
+
+    vim.keymap.set("n", "<leader>tr", function()
+      ensure_exclusive_nvimtree()
+      vim.cmd("NvimTreeRefresh")
+    end, { desc = "Refresh Nvim Tree" })
+
+    vim.keymap.set("n", "<leader>tf", function()
+      ensure_exclusive_nvimtree()
+      vim.cmd("NvimTreeFindFile")
+    end, { desc = "Find File in Nvim Tree" })
+
     vim.keymap.set("n", "<leader>t]", grow_tree, { desc = "Grow Nvim‑Tree by 10 cols" })
     vim.keymap.set("n", "<leader>t[", shrink_tree, { desc = "Shrink Nvim‑Tree by 10 cols (min 30)" })
 

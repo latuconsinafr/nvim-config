@@ -67,7 +67,7 @@ return {
 
             -- Hide quickfix, terminal, help, qf, nvim tree and non-file buffers
             local excluded_buftypes = { "quickfix", "terminal", "help", "nofile" }
-            local excluded_filetypes = { "qf", "NvimTree" }
+            local excluded_filetypes = { "qf", "NvimTree", "dbui", "dbout" }
 
             return not vim.tbl_contains(excluded_buftypes, buftype)
                 and not vim.tbl_contains(excluded_filetypes, filetype)
@@ -103,6 +103,13 @@ return {
             {
               filetype = "NvimTree",
               text = "File Explorer",
+              text_align = "center",
+              separator = true,
+              highlight = "Directory"
+            },
+            {
+              filetype = "dbui",
+              text = "Database Explorer",
               text_align = "center",
               separator = true,
               highlight = "Directory"
