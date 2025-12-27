@@ -35,7 +35,7 @@ require("lazy").setup({
   },
 
   -- Automatically install specified colorschemes during plugin setup
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "rose-pine" } },
 
   -- Enable automatic plugin update checks (runs in the background)
   checker = { enabled = true },

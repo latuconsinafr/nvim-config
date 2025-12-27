@@ -2,8 +2,8 @@ return {
   {
     -- Main Treesitter plugin for better syntax highlighting, indentation, etc.
     "nvim-treesitter/nvim-treesitter",
-    -- Load this plugin eagerly on startup
-    lazy = false,
+    -- Load this plugin lazily on startup
+    lazy = true,
     -- Run :TSUpdate after install to keep parsers updated
     build = ":TSUpdate",
     -- Lazy-load when opening or creating a file

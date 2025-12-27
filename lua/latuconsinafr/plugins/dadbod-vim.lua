@@ -19,6 +19,8 @@ return {
     vim.env.PSQLRC = "/dev/null"
 
     -- UI behaviour
+    -- NOTE: There's a weird behaviour for saved query results that keep displayed on top of the 
+    -- current buffer if it closed previously
     vim.g.db_ui_use_nerd_fonts = 1
     vim.g.db_ui_show_database_icon = 1
     vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/dadbod_ui"

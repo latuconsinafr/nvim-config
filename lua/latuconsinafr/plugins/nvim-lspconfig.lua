@@ -302,12 +302,6 @@ return {
       lspconfig.eslint.setup({
         on_attach = function(client, bufnr)
           on_attach(client, bufnr)
-
-          -- Auto-fix ESLint issues on save (formatting + linting fixes)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
         end,
         capabilities = capabilities,
         settings = {
@@ -352,14 +346,6 @@ return {
       lspconfig.rust_analyzer.setup({
         on_attach = function(client, bufnr)
           on_attach(client, bufnr) -- reuse your shared config
-
-          -- Auto-format Rust on save
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format({ async = false })
-            end,
-          })
         end,
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
         settings = {

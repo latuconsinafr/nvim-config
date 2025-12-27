@@ -28,10 +28,7 @@ vim.opt.isfname:append('@-@')
 vim.opt.cursorline = true
 
 -- Performance
-vim.opt.updatetime = 50
-
--- Fold options
-vim.opt.foldmethod = 'syntax'
+vim.opt.updatetime = 250
 
 -- Remove the ~ at end of buffer
 vim.opt.fillchars = { eob = ' ' }

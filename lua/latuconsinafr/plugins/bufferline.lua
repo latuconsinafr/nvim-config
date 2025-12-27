@@ -157,7 +157,7 @@ return {
 
       -- Close all other buffer except current
       vim.keymap.set("n", "<leader>bdo", "<cmd>BufferLineCloseOthers<CR>",
-        { desc = "Close all other buffers" })
+        { desc = "Close all other buffers except current" })
 
       -- Close all non-pinned buffers and focus smartly
       vim.keymap.set("n", "<leader>bdp", function()

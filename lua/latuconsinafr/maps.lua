@@ -32,19 +32,19 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" }
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over (no yank)" })
 
 -- Delete without affecting registers
-vim.keymap.set("n", "d", [["_d]], { desc = "Delete (no yank)" })
-vim.keymap.set("n", "dd", [["_dd]], { desc = "Delete line (no yank)" })
-vim.keymap.set("x", "d", [["_d]], { desc = "Delete selection (no yank)" })
+vim.keymap.set("n", "<leader>d", [["_d]], { desc = "Delete (no yank)" })
+vim.keymap.set("n", "<leader>dd", [["_dd]], { desc = "Delete line (no yank)" })
+vim.keymap.set("x", "<leader>d", [["_d]], { desc = "Delete selection (no yank)" })
 
 -- Change without affecting registers
-vim.keymap.set("n", "c", [["_c]], { desc = "Change (no yank)" })
-vim.keymap.set("n", "cc", [["_cc]], { desc = "Change line (no yank)" })
-vim.keymap.set("x", "c", [["_c]], { desc = "Change selection (no yank)" })
+vim.keymap.set("n", "<leader>c", [["_c]], { desc = "Change (no yank)" })
+vim.keymap.set("n", "<leader>cc", [["_cc]], { desc = "Change line (no yank)" })
+vim.keymap.set("x", "<leader>c", [["_c]], { desc = "Change selection (no yank)" })
 
 -- Substitute without affecting registers
-vim.keymap.set("n", "s", [["_s]], { desc = "Substitute character (no yank)" })
-vim.keymap.set("n", "S", [["_S]], { desc = "Substitute line (no yank)" })
-vim.keymap.set("x", "s", [["_s]], { desc = "Substitute selection (no yank)" })
+vim.keymap.set("n", "<leader>s", [["_s]], { desc = "Substitute character (no yank)" })
+vim.keymap.set("n", "<leader>S", [["_S]], { desc = "Substitute line (no yank)" })
+vim.keymap.set("x", "<leader>s", [["_s]], { desc = "Substitute selection (no yank)" })
 
 -- Insert mode escape
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Escape insert mode" })
@@ -186,3 +186,10 @@ vim.keymap.set("n", "<leader>bf", function()
     end
   end)
 end, { desc = "Set buffer filetype" })
+
+-- Toggle spellcheck
+vim.keymap.set("n", "<leader>sc", function()
+  local current = vim.wo.spell
+  vim.wo.spell = not current
+  print("Spell check: " .. (vim.wo.spell and "enabled" or "disabled"))
+end, { desc = "Toggle spell check" })
