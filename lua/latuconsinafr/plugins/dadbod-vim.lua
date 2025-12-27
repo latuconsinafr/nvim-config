@@ -12,7 +12,7 @@ return {
   },
   cmd = { "DB", "DBUI", "DBUIToggle", "DBUIAddConnection" },
   keys = {
-    { "<leader>dt", desc = "Toggle DB UI" },
+    { "<leader>Dt", desc = "Toggle DB UI" },
   },
   init = function()
     -- Prevent .psqlrc from interfering with metadata queries
@@ -145,7 +145,7 @@ return {
     end
 
     -- Toggle DBUI (exclusive)
-    vim.keymap.set("n", "<leader>dt", function()
+    vim.keymap.set("n", "<leader>Dt", function()
       if is_sidebar_open("NvimTree") then
         vim.cmd("NvimTreeClose")
       end
@@ -157,11 +157,11 @@ return {
     end, { desc = "Toggle DB UI (exclusive)" })
 
     -- Execute query
-    vim.keymap.set("n", "<leader>dq", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute SQL" })
-    vim.keymap.set("v", "<leader>dq", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute SQL (selection)" })
+    vim.keymap.set("n", "<leader>Dq", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute SQL" })
+    vim.keymap.set("v", "<leader>Dq", "<plug>(dbui_executequery)", { desc = "execute sql (selection)" })
 
-    -- Grow/shrink DBUI
-    vim.keymap.set("n", "<leader>d]", grow_dbui, { desc = "Grow DBUI by 10 cols" })
-    vim.keymap.set("n", "<leader>d[", shrink_dbui, { desc = "Shrink DBUI by 10 cols (min 40)" })
+    -- grow/shrink dbui
+    vim.keymap.set("n", "<leader>D]", grow_dbui, { desc = "grow dbui by 10 cols" })
+    vim.keymap.set("n", "<leader>D[", shrink_dbui, { desc = "shrink dbui by 10 cols (min 40)" })
   end,
 }

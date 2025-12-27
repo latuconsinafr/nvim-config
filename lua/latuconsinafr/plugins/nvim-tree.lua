@@ -102,7 +102,7 @@ return {
     end
 
     -- Set keymaps explicitly (eagerly)
-    vim.keymap.set("n", "<leader>tt", function()
+    vim.keymap.set("n", "<leader>Tt", function()
       -- Close DBUI first
       if is_sidebar_open("dbui") then
         vim.cmd("DBUIClose")
@@ -112,18 +112,18 @@ return {
       vim.cmd("NvimTreeToggle")
     end, { desc = "Toggle NvimTree (exclusive)" })
 
-    vim.keymap.set("n", "<leader>tr", function()
+    vim.keymap.set("n", "<leader>Tr", function()
       ensure_exclusive_nvimtree()
       vim.cmd("NvimTreeRefresh")
     end, { desc = "Refresh Nvim Tree" })
 
-    vim.keymap.set("n", "<leader>tf", function()
+    vim.keymap.set("n", "<leader>Tf", function()
       ensure_exclusive_nvimtree()
       vim.cmd("NvimTreeFindFile")
     end, { desc = "Find File in Nvim Tree" })
 
-    vim.keymap.set("n", "<leader>t]", grow_tree, { desc = "Grow Nvim‑Tree by 10 cols" })
-    vim.keymap.set("n", "<leader>t[", shrink_tree, { desc = "Shrink Nvim‑Tree by 10 cols (min 30)" })
+    vim.keymap.set("n", "<leader>T]", grow_tree, { desc = "Grow Nvim‑Tree by 10 cols" })
+    vim.keymap.set("n", "<leader>T[", shrink_tree, { desc = "Shrink Nvim‑Tree by 10 cols (min 30)" })
 
     -- Define the highlight group for indent marker AFTER setup,
     vim.api.nvim_set_hl(0, "NvimTreeIndentMarker", { fg = "#6e6a86" }) -- a muted, slightly purplish gray from the Rose Pine palette.
