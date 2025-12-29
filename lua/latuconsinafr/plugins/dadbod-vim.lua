@@ -19,7 +19,7 @@ return {
     vim.env.PSQLRC = "/dev/null"
 
     -- UI behaviour
-    -- NOTE: There's a weird behaviour for saved query results that keep displayed on top of the 
+    -- NOTE: There's a weird behaviour for saved query results that keep displayed on top of the
     -- current buffer if it closed previously
     vim.g.db_ui_use_nerd_fonts = 1
     vim.g.db_ui_show_database_icon = 1
@@ -157,8 +157,8 @@ return {
     end, { desc = "Toggle DB UI (exclusive)" })
 
     -- Execute query
-    vim.keymap.set("n", "<leader>Dq", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute SQL" })
-    vim.keymap.set("v", "<leader>Dq", "<plug>(dbui_executequery)", { desc = "execute sql (selection)" })
+    vim.keymap.set("n", "<leader>dq", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute SQL" })
+    vim.keymap.set("v", "<leader>dq", "<plug>(DBUI_ExecuteQuery)", { desc = "execute sql (selection)" })
 
     -- grow/shrink dbui
     vim.keymap.set("n", "<leader>D]", grow_dbui, { desc = "grow dbui by 10 cols" })
