@@ -73,7 +73,7 @@ return {
         render = {
           indent = 1,
           max_type_length = 20, -- keeps type readable
-          max_value_lines = 1, -- prevents vertical spam
+          max_value_lines = 1,  -- prevents vertical spam
         },
         layouts = {
           {
@@ -261,11 +261,67 @@ return {
         end
       end
 
+      -- DAP breakpoint navigation helpers
+      local function get_all_breakpoints()
+        local bps = {}
+        for bufnr, buf_bps in pairs(require("dap.breakpoints").get()) do
+          for _, bp in ipairs(buf_bps) do
+            table.insert(bps, {
+              bufnr = bufnr,
+              line = bp.line,
+            })
+          end
+        end
+        table.sort(bps, function(a, b)
+          if a.bufnr == b.bufnr then
+            return a.line < b.line
+          end
+          return a.bufnr < b.bufnr
+        end)
+        return bps
+      end
+
+      local function jump_breakpoint(direction)
+        local bps = get_all_breakpoints()
+        if #bps == 0 then
+          vim.notify("No breakpoints set", vim.log.levels.WARN)
+          return
+        end
+
+        local cur_buf = vim.api.nvim_get_current_buf()
+        local cur_line = vim.api.nvim_win_get_cursor(0)[1]
+
+        if direction == "next" then
+          for _, bp in ipairs(bps) do
+            if bp.bufnr > cur_buf or (bp.bufnr == cur_buf and bp.line > cur_line) then
+              vim.api.nvim_set_current_buf(bp.bufnr)
+              vim.api.nvim_win_set_cursor(0, { bp.line, 0 })
+              return
+            end
+          end
+        else
+          for i = #bps, 1, -1 do
+            local bp = bps[i]
+            if bp.bufnr < cur_buf or (bp.bufnr == cur_buf and bp.line < cur_line) then
+              vim.api.nvim_set_current_buf(bp.bufnr)
+              vim.api.nvim_win_set_cursor(0, { bp.line, 0 })
+              return
+            end
+          end
+        end
+
+        vim.notify("No more breakpoints", vim.log.levels.INFO)
+      end
+
       -- Keymaps for resizing DAP UI
       vim.keymap.set("n", "<leader>d]", grow_dap_left, { desc = "Grow DAP left panel" })
       vim.keymap.set("n", "<leader>d[", shrink_dap_left, { desc = "Shrink DAP left panel" })
       vim.keymap.set("n", "<leader>d}", grow_dap_bottom, { desc = "Grow DAP bottom panel" })
       vim.keymap.set("n", "<leader>d{", shrink_dap_bottom, { desc = "Shrink DAP bottom panel" })
+
+      -- Keymaps to jump between breakpoint
+      vim.keymap.set("n", "]b", function() jump_breakpoint("next") end, { desc = "Next breakpoint" })
+      vim.keymap.set("n", "[b", function() jump_breakpoint("prev") end, { desc = "Previous breakpoint" })
     end,
   },
 }
