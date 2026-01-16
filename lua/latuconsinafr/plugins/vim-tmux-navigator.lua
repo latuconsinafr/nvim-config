@@ -11,9 +11,10 @@ return {
   },
   keys = {
     -- Bind nvim command to tmux command
-    { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Navigate Left" },
-    { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Navigate Down" },
-    { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Navigate Up" },
-    { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",    desc = "Navigate Right" },
+    { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",          desc = "Navigate Left" },
+    { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",          desc = "Navigate Down" },
+    { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",            desc = "Navigate Up" },
+    { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",         desc = "Navigate Right" },
+    { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", desc = "Previous Split" },
   },
 }

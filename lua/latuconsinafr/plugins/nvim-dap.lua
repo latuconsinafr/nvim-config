@@ -25,9 +25,9 @@ return {
       { "<leader>dt", function() require("dap").terminate() end,                                            desc = "Terminate" },
 
       -- Session and UI controls
-      { "<leader>dr", function() require("dap").repl.toggle() end,                                          desc = "Toggle REPL" },
-      { "<leader>ds", function() require("dap").session() end,                                              desc = "Session" },
-      { "<leader>du", function() require("dapui").toggle() end,                                             desc = "Toggle DAP UI" },
+      { "<leader>Dr", function() require("dap").repl.toggle() end,                                          desc = "Toggle REPL" },
+      { "<leader>Ds", function() require("dap").session() end,                                              desc = "Session" },
+      { "<leader>Du", function() require("dapui").toggle() end,                                             desc = "Toggle DAP UI" },
       { "<leader>de", function() require("dapui").eval() end,                                               desc = "Eval",                  mode = { "n", "v" } },
     },
     config = function()

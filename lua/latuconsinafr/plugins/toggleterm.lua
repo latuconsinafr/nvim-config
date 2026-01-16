@@ -67,7 +67,7 @@ return {
 
     -- Keymaps for terminal management
     -- Main toggle (replaces Ctrl+\)
-    vim.keymap.set({ 'n', 't' }, '<C-\\>', '<cmd>lua toggle_terminal(1)<CR>', { desc = "Toggle Alpha" })
+    -- vim.keymap.set({ 'n', 't' }, '<C-\\>', '<cmd>lua toggle_terminal(1)<CR>', { desc = "Toggle Alpha" })
 
     -- Individual terminal toggles
     vim.keymap.set({ 'n', 't' }, '\\1', '<cmd>lua toggle_terminal(1)<CR>', { desc = "Toggle Alpha" })
